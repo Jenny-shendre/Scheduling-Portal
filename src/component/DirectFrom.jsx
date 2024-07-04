@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
 import axios from "axios";
+import { addSlider } from "../features/Data";
+import { useDispatch } from "react-redux";
 function DirectFrom() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -19,16 +22,7 @@ function DirectFrom() {
       EmailId: data.EmailId,
       MobileNo: data.MobileNo,
     };
-    try {
-      const response = await axios.post("", userInfo);
-      console.log("API Response:", response.data);
-      navigate("/Slide2");
-    } catch (error) {
-      console.error(
-        "API Error:",
-        error.response ? error.response.data : error.message
-      );
-    }
+    dispatch(addSlider(data));
     console.log(data);
     navigate("/LocationDirect");
   };
@@ -39,9 +33,12 @@ function DirectFrom() {
         <div className="opacity-[50%]">
           <img className="h-[1000px] fixed w-full" src={img} alt="Background" />
         </div>
-        <Link to='/'>
+        <Link to="/">
           <div className="fixed arrowss bottom-4 left-4">
-            <img className="lg:mt-[570px] lg:ml-12  cursor-pointer" src={Frame} />
+            <img
+              className="lg:mt-[570px] lg:ml-12  cursor-pointer"
+              src={Frame}
+            />
           </div>
         </Link>
 
@@ -56,15 +53,14 @@ function DirectFrom() {
                 <div>
                   <label
                     htmlFor="channelName"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
-                    Customer’s Name
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
+                    name
                   </label>
                   <input
-                    {...register("Customer’s Name", { required: true })}
+                    {...register("name", { required: true })}
                     type="text"
-                    id="Customer’s Name"
-                    name="Customer’s Name"
+                    id="name"
+                    name="name"
                     placeholder="John Doe"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
@@ -74,15 +70,14 @@ function DirectFrom() {
                 <div>
                   <label
                     htmlFor="companyName"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
-                    Email Id
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
+                    email
                   </label>
                   <input
-                    {...register("Email Id", { required: true })}
+                    {...register("email", { required: true })}
                     type="text"
-                    id="Email Id"
-                    name="Email Id"
+                    id="email"
+                    name="email"
                     placeholder="johndoe@gmail.com"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
@@ -92,15 +87,14 @@ function DirectFrom() {
                 <div>
                   <label
                     htmlFor="customerName"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
-                    Mobile No
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
+                    mobile
                   </label>
                   <input
-                    {...register("Mobile No", { required: true })}
+                    {...register("mobile", { required: true })}
                     type="text"
-                    id="Mobile No"
-                    name="Mobile No"
+                    id="mobile"
+                    name="mobile"
                     placeholder="John Doe"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
@@ -125,8 +119,7 @@ function DirectFrom() {
                 <div className="p-2">
                   <button
                     type="submit"
-                    className="font-Manrope w-full bg-red-950 text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                  >
+                    className="font-Manrope w-full bg-red-950 text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                     Proceed for Step 2
                   </button>
                 </div>
