@@ -7,6 +7,7 @@ import Frame from "../assets/Frame.png";
 import "../home.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { removeSlider } from "../features/Data";
 
 const projectLocations = {
   project1: "123 Main St, City A",
@@ -53,12 +54,11 @@ function LocationDirect() {
         }
       );
       console.log("You message has been sent", response);
+      dispatch(removeSlider());
+      navigate("/ScheduledCard1");
     } catch (error) {
       console.error("something went wrong");
     }
-
-    console.log(data);
-    navigate("/ScheduledCard1");
   };
 
   useEffect(() => {
