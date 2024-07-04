@@ -5,8 +5,11 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
 import "../home.css";
+import { useDispatch, useSelector } from "react-redux";
 
 function Slide1() {
+  // const Todos = useSelector((state) => state.Todo);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -16,11 +19,13 @@ function Slide1() {
 
   const onSubmit = async (data) => {
     const userInfo = {
-      ChannelName: data.ChannelName,
-      ChannelCompanyName: data.ChannelCompanyName,
-      CustomerName: data.CustomerName,
-      CustomerMobileNumber: data.CustomerMobileNumber,
+      channelPartnerName: data.channelPartnerName,
+      ChannelchannelPartnerCompanyName: data.ChannelchannelPartnerCompanyName,
+      customerName: data.customerName,
+      CustomercustomerMobileLastFour: data.CustomercustomerMobileLastFour,
     };
+    console.log("UserInfo", data);
+    dispatch(addSlider(data));
     try {
       const response = await axios.post("", userInfo);
       console.log("API Response:", response.data);
@@ -41,7 +46,7 @@ function Slide1() {
         <div className="opacity-[50%]">
           <img className="h-[1000px] fixed w-full" src={img} alt="Background" />
         </div>
-        <Link to='/'>
+        <Link to="/">
           <div className="fixed arrowss bottom-4 left-4">
             <img className="cursor-pointer" src={Frame} alt="Back" />
           </div>
@@ -56,45 +61,48 @@ function Slide1() {
               <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
-                    htmlFor="channelName"
-                    className="block text-sm font-medium text-brown-700 font-[Manrope]"
-                  >
+                    htmlFor="channelPartnerName"
+                    className="block text-sm font-medium text-brown-700 font-[Manrope]">
                     Channel Partner's Name
                   </label>
                   <input
-                    {...register("channelName", { required: true })}
+                    {...register("channelPartnerName", { required: true })}
                     type="text"
-                    id="channelName"
-                    name="channelName"
+                    id="channelPartnerName"
+                    name="channelPartnerName"
                     placeholder="John Doe"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
-                  {errors.channelName && <span>This field is required</span>}
+                  {errors.channelPartnerName && (
+                    <span>This field is required</span>
+                  )}
                 </div>
 
                 <div>
                   <label
-                    htmlFor="companyName"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
+                    htmlFor="channelPartnerCompanyName"
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
                     Channel Partner's Company Name
                   </label>
                   <input
-                    {...register("companyName", { required: true })}
+                    {...register("channelPartnerCompanyName", {
+                      required: true,
+                    })}
                     type="text"
-                    id="companyName"
-                    name="companyName"
+                    id="channelPartnerCompanyName"
+                    name="channelPartnerCompanyName"
                     placeholder="Acme Realtors"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
-                  {errors.companyName && <span>This field is required</span>}
+                  {errors.channelPartnerCompanyName && (
+                    <span>This field is required</span>
+                  )}
                 </div>
 
                 <div>
                   <label
                     htmlFor="customerName"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
                     Customer Name
                   </label>
                   <input
@@ -110,23 +118,22 @@ function Slide1() {
 
                 <div>
                   <label
-                    htmlFor="mobileNumber"
-                    className="block text-sm font-medium text-brown-700 font-Manrope"
-                  >
+                    htmlFor="customerMobileLastFour"
+                    className="block text-sm font-medium text-brown-700 font-Manrope">
                     Last four digits of Customer Mobile Number
                   </label>
                   <input
-                    {...register("mobileNumber", {
+                    {...register("customerMobileLastFour", {
                       required: true,
                       maxLength: 4,
                     })}
                     type="text"
-                    id="mobileNumber"
-                    name="mobileNumber"
+                    id="customerMobileLastFour"
+                    name="customerMobileLastFour"
                     placeholder="1234"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
-                  {errors.mobileNumber && (
+                  {errors.customerMobileLastFour && (
                     <span>This field is required and must be 4 digits</span>
                   )}
                 </div>
@@ -134,8 +141,7 @@ function Slide1() {
                 <div className="p-2">
                   <button
                     type="submit"
-                    className=" font-Manrope w-full bg-red-950 text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                  >
+                    className=" font-Manrope w-full bg-red-950 text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                     Proceed for Step 2
                   </button>
                 </div>
@@ -147,5 +153,6 @@ function Slide1() {
     </>
   );
 }
+import { addSlider } from "../features/Data";
 
 export default Slide1;
