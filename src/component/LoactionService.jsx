@@ -14,7 +14,7 @@ function LoactionService() {
   const navigate = useNavigate();
   const Slider = useSelector((state) => state);
 
-  const [formData, setFormData] = useState("");
+  const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -34,13 +34,14 @@ function LoactionService() {
 
   const onSubmit = async () => {
 
+    // const completeData = { ...data, ...object };
+    // console.log("object", completeData);
+
+
     console.log("object", object);
 
     try {
-      const response = await axios.post("https://prodictivity-management-tool2.vercel.app/api/seviceRequest",
-        {
-          ...object
-        });
+      const response = await axios.post("https://prodictivity-management-tool2.vercel.app/api/seviceRequest", object);
       console.log("Your message has been sent", response);
     } catch (error) {
       console.error("Something went wrong", error);
