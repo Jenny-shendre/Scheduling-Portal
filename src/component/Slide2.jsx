@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import img from "../assets/img.png";
 import Logo from "../assets/Logo.png";
 import { useForm } from "react-hook-form";
@@ -21,12 +21,24 @@ function Slide2() {
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState("");
   const [projectLocation, setProjectLocation] = useState("");
+  const [data, setData] = useState([]);
   const dispatch = useDispatch();
+
   const handleProjectChange = (event) => {
     const projectValue = event.target.value;
     setSelectedProject(projectValue);
-    setProjectLocation(projectLocations[projectValue] || "");
   };
+
+  useEffect(() => {
+    const filteredData = data.filter(
+      (project) => selectedProject === project.name
+    );
+    if (filteredData.length > 0) {
+      setProjectLocation(filteredData[0].location);
+    } else {
+      setProjectLocation("");
+    }
+  }, [selectedProject, data]);
 
   const {
     register,
@@ -36,8 +48,8 @@ function Slide2() {
 
   const onSubmit = async (data) => {
     const userInfo = {
-      ProjectName: data.ProjectName,
-      ProjectLocation: data.ProjectLocation,
+      ProjectName: data.projectName,
+      ProjectLocation: data.projectLocation,
     };
 
     let object = {
@@ -45,9 +57,6 @@ function Slide2() {
       projectName: selectedProject,
       projectLocation: projectLocation,
     };
-
-    console.log("object", data);
-    console.log("object", object);
     try {
       const response = await axios.post(
         "https://prodictivity-management-tool2.vercel.app/api/partners/save",
@@ -61,9 +70,22 @@ function Slide2() {
     } catch (error) {
       console.error("something went wrong");
     }
-
-    console.log(data);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://prodictivity-management-tool2.vercel.app/api/projects"
+        );
+        setData(response.data);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -75,7 +97,7 @@ function Slide2() {
         <Link to="/Slide1">
           <div className="fixed arrowss bottom-4 left-4">
             <img
-              className="lg:mt-[500px] lg:ml-12  cursor-pointer"
+              className="lg:mt-[500px] lg:ml-12 cursor-pointer"
               src={Frame}
             />
           </div>
@@ -100,18 +122,15 @@ function Slide2() {
                   value={selectedProject}
                   onChange={handleProjectChange}
                   className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
-                  <option className="font-Manrope" value="">
-                    Choose Project
-                  </option>
-                  <option className="font-Manrope" value="project1">
-                    Project 1
-                  </option>
-                  <option className="font-Manrope" value="project2">
-                    Project 2
-                  </option>
-                  <option className="font-Manrope" value="project3">
-                    Project 3
-                  </option>
+                  <option value="">Select a project</option>
+                  {data.map((project) => (
+                    <option
+                      key={project.name}
+                      className="font-Manrope"
+                      value={project.name}>
+                      {project.name}
+                    </option>
+                  ))}
                 </select>
                 {errors.projectName && <span>This field is required</span>}
               </div>
@@ -119,7 +138,7 @@ function Slide2() {
               <div>
                 <label
                   htmlFor="projectLocation"
-                  className="block text-sm font-medium text-brown-700 font-Manrope ">
+                  className="block text-sm font-medium text-brown-700 font-Manrope">
                   Project Location
                 </label>
                 <input
