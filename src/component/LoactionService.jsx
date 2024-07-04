@@ -6,23 +6,20 @@ import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
 import "../home.css";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 
-const projectLocations = {
-  project1: "123 Main St, City A",
-  project2: "456 Oak Ave, City B",
-  project3: "789 Pine Rd, City C",
-};
+
 
 function LoactionService() {
   const navigate = useNavigate();
-  const [selectedProject, setSelectedProject] = useState("");
-  const [projectLocation, setProjectLocation] = useState("");
+  const Slider = useSelector((state) => state);
 
-  const handleProjectChange = (event) => {
-    const projectValue = event.target.value;
-    setSelectedProject(projectValue);
-    setProjectLocation(projectLocations[projectValue] || "");
-  };
+  const [formData, setFormData] = useState("");
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
 
   const {
     register,
@@ -30,20 +27,27 @@ function LoactionService() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    const userInfo = {
-      ProjectName: data.ProjectName,
-      ProjectLocation: data.ProjectLocation,
-    };
-    try {
-      const response = await axios.post("", userInfo);
-      console.log("You message has been sent");
-    } catch (error) {
-      console.error("something went wrong");
-    }
+  let object = {
+    ...Slider.Slider[0],
+    ...formData
+  };
 
-    console.log(data);
+  const onSubmit = async () => {
+
+    console.log("object", object);
+
+    try {
+      const response = await axios.post("https://prodictivity-management-tool2.vercel.app/api/seviceRequest",
+        {
+          ...object
+        });
+      console.log("Your message has been sent", response);
+    } catch (error) {
+      console.error("Something went wrong", error);
+    }
     navigate("/ScheduledCard1");
+    dispatch(removeSlider());
+
   };
 
   return (
@@ -54,7 +58,7 @@ function LoactionService() {
         </div>
 
         <Link to='/ServiceRequestForm'>
-          <div className="fixed arrowss">
+          <div className="fixed arrowss bottom-4 left-4">
             <img className="lg:mt-[500px] lg:ml-12  cursor-pointer" src={Frame} />
           </div>
         </Link>
@@ -67,6 +71,28 @@ function LoactionService() {
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label
+                  htmlFor="typeOfService"
+                  className="block text-sm font-medium text-brown-700 font-Manrope"
+                >
+                  Type of Service
+                </label>
+                <select
+                  {...register("typeOfService", { required: true })}
+                  id="typeOfService"
+                  name="typeOfService"
+                  onChange={handleChange}
+                  className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                >
+                  <option value="">Choose Services</option>
+                  <option value="Plumber">Plumber </option>
+                  <option value="Mechanic">Mechanic</option>
+                  <option value="Mechanic">Mechanic</option>
+                </select>
+                {errors.typeOfService && <span>This field is required</span>}
+              </div>
+
+              <div>
+                <label
                   htmlFor="projectName"
                   className="block text-sm font-medium text-brown-700 font-Manrope"
                 >
@@ -76,43 +102,40 @@ function LoactionService() {
                   {...register("projectName", { required: true })}
                   id="projectName"
                   name="projectName"
-                  value={selectedProject}
-                  onChange={handleProjectChange}
+                  onChange={handleChange}
                   className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                 >
                   <option value="">Choose Project</option>
-                  <option value="project1">Project 1</option>
-                  <option value="project2">Project 2</option>
-                  <option value="project3">Project 3</option>
+                  <option value="project A">Project A</option>
+                  <option value="project B">Project B</option>
+                  <option value="project B">Project C</option>
                 </select>
                 {errors.projectName && <span>This field is required</span>}
               </div>
 
-              <div>
+
+              {/* <div>
                 <label
-                  htmlFor="projectLocation"
+                  htmlFor="projectName"
                   className="block text-sm font-medium text-brown-700 font-Manrope"
                 >
-                  Project Location
+                  Project Name
                 </label>
                 <input
-                  // {...register("projectLocation", { required: true })}
                   type="text"
-                  id="projectLocation"
-                  name="projectLocation"
-                  value={projectLocation}
+                  id="projectName"
+                  name="projectName"
                   readOnly
                   className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm p-2 focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                 />
-                {/* {errors.projectLocation && <span>This field is required</span>} */}
-              </div>
+              </div> */}
 
               <div className="p-5">
                 <button
                   type="submit"
                   className="font-Manrope w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
                 >
-                  Assign Executive
+                  Assign Executives
                 </button>
               </div>
             </form>
