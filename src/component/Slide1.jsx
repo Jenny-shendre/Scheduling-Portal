@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
 import "../home.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Slide1() {
   // const Todos = useSelector((state) => state.Todo);
@@ -24,7 +24,6 @@ function Slide1() {
       customerName: data.customerName,
       CustomercustomerMobileLastFour: data.CustomercustomerMobileLastFour,
     };
-    console.log("UserInfo", data);
     dispatch(addSlider(data));
     try {
       const response = await axios.post("", userInfo);
@@ -36,7 +35,7 @@ function Slide1() {
         error.response ? error.response.data : error.message
       );
     }
-    console.log(data);
+
     navigate("/Slide2");
   };
 
