@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import img from "../assets/img.png";
 import Logo from "../assets/Logo.png";
 import Photh from "../assets/Photh.png";
 import Fram from "../assets/Fram.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeSlider } from "../features/Data";
 
 function ScheduledCard2() {
+  const [servicePersonName, setservicePersonName] = useState({});
+  const Slider = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const datacall = () => {
+    setservicePersonName(...Slider.Slider);
+    console.log("Slider", Slider);
+  };
+  useEffect(() => {
+    datacall();
+  }, []);
+  console.log("Slider", servicePersonName.servicePersonName);
   return (
     <>
       <div>
@@ -18,6 +32,7 @@ function ScheduledCard2() {
             <img
               className="lg:mt-[620px] lg:ml-[780px]  cursor-pointer"
               src={Fram}
+              onClick={() => dispatch(removeSlider())}
             />
           </div>
         </Link>
@@ -41,7 +56,8 @@ function ScheduledCard2() {
             </div>
 
             <p className="text-[#632E04] text-lg mb-2">
-              You have been Assigned with "Ashok Reddy"
+              You have been Assigned with "{servicePersonName.servicePersonName}
+              "
             </p>
             <p className="text-[#632E04] text-sm">
               kindly wait for few minutes you will be attended shortly.

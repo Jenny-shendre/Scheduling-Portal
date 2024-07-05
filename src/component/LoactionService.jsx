@@ -7,7 +7,7 @@ import Frame from "../assets/Frame.png";
 import "../home.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { removeSlider } from "../features/Data";
+import { addSlider, removeSlider } from "../features/Data";
 
 function LoactionService() {
   const navigate = useNavigate();
@@ -45,8 +45,9 @@ function LoactionService() {
         { ...object }
       );
       console.log("Your message has been sent", response);
-      navigate("/ScheduledCard1");
       dispatch(removeSlider());
+      dispatch(addSlider(response.data));
+      navigate("/ScheduledCard2");
     } catch (error) {
       console.error("Something went wrong", error);
     }
@@ -173,7 +174,7 @@ function LoactionService() {
                 <button
                   type="submit"
                   className="font-Manrope w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
-                  Assign Executives
+                  Assign Service Person
                 </button>
               </div>
             </form>
