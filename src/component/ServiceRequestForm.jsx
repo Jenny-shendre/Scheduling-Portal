@@ -4,8 +4,11 @@ import img from "../assets/img.png";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addSlider } from "../features/Data";
+
 function ServiceRequestForm() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -14,20 +17,10 @@ function ServiceRequestForm() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const userInfo = {
-      ChannelName: data.ChannelName,
-      EmailId: data.EmailId,
-      CustomerID: data.CustomerID,
-    };
-    try {
-      const response = await axios.post("", userInfo);
-      console.log("You message has been sent");
-    } catch (error) {
-      console.error("something went wrong");
-    }
-
     console.log(data);
-    navigate("/LoactionService");
+    dispatch(addSlider(data));
+    navigate('/LoactionService');
+
   };
 
   return (
@@ -57,10 +50,10 @@ function ServiceRequestForm() {
                     Customer’s Name
                   </label>
                   <input
-                    {...register("Customer’s Name", { required: true })}
+                    {...register("name", { required: true })}
                     type="text"
-                    id="Customer’s Name"
-                    name="Customer’s Name"
+                    id="name"
+                    name="name"
                     placeholder="John Doe"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
@@ -69,20 +62,20 @@ function ServiceRequestForm() {
 
                 <div>
                   <label
-                    htmlFor="companyName"
+                    htmlFor="mobileNo"
                     className="block text-sm font-medium text-brown-700 font-Manrope"
                   >
-                    Email Id
+                    Mobile No *
                   </label>
                   <input
-                    {...register("Email Id", { required: true })}
+                    {...register("mobileNo", { required: true })}
                     type="text"
-                    id="Email Id"
-                    name="Email Id"
-                    placeholder="johndoe@gmail.com"
+                    id="mobileNo"
+                    name="mobileNo"
+                    placeholder="8669711028"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
-                  {errors.EmailName && <span>This field is required</span>}
+                  {errors.mobileNo && <span>This field is required</span>}
                 </div>
 
                 <div>
@@ -93,11 +86,11 @@ function ServiceRequestForm() {
                     Customer ID
                   </label>
                   <input
-                    {...register("Mobile No", { required: true })}
+                    {...register("customerId", { required: true })}
                     type="text"
-                    id="Mobile No"
-                    name="Mobile No"
-                    placeholder="John Doe"
+                    id="customerId"
+                    name="customerId"
+                    placeholder="ROFC001"
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.MobileNoName && <span>This field is required</span>}
