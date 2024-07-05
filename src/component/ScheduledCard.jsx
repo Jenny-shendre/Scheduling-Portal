@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import img from "../assets/img.png";
 import Logo from "../assets/Logo.png";
 import Photh from "../assets/Photh.png";
 import Fram from "../assets/Fram.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeSlider } from "../features/Data";
 
 function ScheduledCard() {
+  const [servicePersonName, setservicePersonName] = useState({});
+  const Slider = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  const datacall = () => {
+    setservicePersonName(...Slider.Slider);
+    console.log("Slider", servicePersonName);
+  };
+  useEffect(() => {
+    datacall();
+  }, []);
   return (
     <>
       <div>
@@ -32,18 +45,19 @@ function ScheduledCard() {
             </div>
 
             <p className="text-[#632E04] text-lg mb-2 font-Manrope">
-              You have been Assigned with "Ashok Reddy"
+              You have been Assigned with "{servicePersonName.attendantName}"
             </p>
             <p className="text-[#632E04] text-sm font-Manrope">
               kindly wait for few minutes you will be attended shortly.
             </p>
           </div>
 
-          <Link to='/' className="relative z-20 mt-4">
+          <Link to="/" className="relative z-20 mt-4">
             <div className="arrowss mt-4">
               <img
                 className="cursor-pointer"
                 src={Fram}
+                onClick={() => dispatch(removeSlider())}
               />
             </div>
           </Link>

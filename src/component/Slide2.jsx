@@ -67,6 +67,7 @@ function Slide2() {
       console.log("You message has been sent", response);
       navigate("/ScheduledCard");
       dispatch(removeSlider());
+      dispatch(addSlider(response.data));
     } catch (error) {
       console.error("something went wrong");
     }
