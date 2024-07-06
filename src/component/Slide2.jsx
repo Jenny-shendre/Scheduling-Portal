@@ -100,20 +100,21 @@ function Slide2() {
             <img
               className="lg:mt-[500px] lg:ml-12 cursor-pointer"
               src={Frame}
+              alt="Back"
             />
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo" />
+              <img src={Logo} alt="Logo" className="logo w-44 h-44" /> {/* Adjusted size */}
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label
                   htmlFor="projectName"
-                  className="block text-sm font-medium text-brown-700 font-Manrope">
+                  className="block text-sm font-700  text-brown-700 font-Manrope">
                   Project Name
                 </label>
                 <select
@@ -139,7 +140,7 @@ function Slide2() {
               <div>
                 <label
                   htmlFor="projectLocation"
-                  className="block text-sm font-medium text-brown-700 font-Manrope">
+                  className="block text-sm font-700  text-brown-700 font-Manrope">
                   Project Location
                 </label>
                 <input
@@ -157,7 +158,7 @@ function Slide2() {
               <div className="p-5">
                 <button
                   type="submit"
-                  className="font-Manrope w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                  className="font-Manrope font-700  w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Assign Executive
                 </button>
               </div>
