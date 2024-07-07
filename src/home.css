@@ -66,14 +66,13 @@
   filter: grayscale(100%);
   transition: filter 0.3s, opacity 0.3s;
   opacity: 0.5;
-  /* Adjust the opacity to simulate rgba color */
+
 }
 
 .text-hover.hovered img {
   filter: none;
-  /* Remove grayscale on hover */
+
   opacity: 1;
-  /* Reset opacity on hover */
 }
 
 .font-700 {
@@ -86,4 +85,12 @@
 
 .font-500 {
   font-weight: 500;
+}
+
+::placeholder {
+  font-family: 'Manrope', sans-serif;
+}
+
+.select-menu {
+  margin-left: -8px;
 }

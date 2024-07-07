@@ -27,13 +27,13 @@ function ScheduledCard2() {
     <>
       <div>
         <div className="opacity-[50%]">
-          <img className="h-[1000px] fixed w-full" src={img} alt="Background"></img>
+          <img className="h-full fixed w-full" src={img} alt="Background"></img>
         </div>
 
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-5 w-full max-w-md text-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-44 h-44" /> {/* Adjusted size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
             </div>
 
             <p className="text-[#632E04] font-700 text-lg mb-4 font-Manrope">
