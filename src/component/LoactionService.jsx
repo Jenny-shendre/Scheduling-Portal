@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import img from "../assets/img.png";
 import Logo from "../assets/Logo.png";
+import Drop from "../../src/assets/Drop.png"; // Import the dropdown icon
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
@@ -16,33 +17,73 @@ function LoactionService() {
   const [formData, setFormData] = useState({});
   const [data, setData] = useState([]);
   const [seviceRequest, setseviceRequest] = useState([]);
+  const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
+  const [isProjectDropdownOpen, setIsProjectDropdownOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const typeDropdownRef = useRef(null);
+  const projectDropdownRef = useRef(null);
 
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm();
 
-  let object = {
-    ...Slider.Slider[0],
-    ...formData,
+  const handleTypeChange = (type) => {
+    setFormData({ ...formData, type });
+    setIsTypeDropdownOpen(false);
+    clearErrors("type"); // Clear errors when an option is selected
   };
 
+  const handleProjectChange = (projectName) => {
+    setFormData({ ...formData, projectName });
+    setIsProjectDropdownOpen(false);
+    clearErrors("projectName"); // Clear errors when an option is selected
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      typeDropdownRef.current &&
+      !typeDropdownRef.current.contains(event.target)
+    ) {
+      setIsTypeDropdownOpen(false);
+    }
+    if (
+      projectDropdownRef.current &&
+      !projectDropdownRef.current.contains(event.target)
+    ) {
+      setIsProjectDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const onSubmit = async () => {
-    const completeData = { ...data, ...object };
+    if (!formData.type) {
+      setError("type", { type: "manual", message: "This field is required" });
+    }
+    if (!formData.projectName) {
+      setError("projectName", { type: "manual", message: "This field is required" });
+    }
+    if (!formData.type || !formData.projectName) {
+      return;
+    }
+
+    const completeData = { ...data, ...formData, ...Slider.Slider[0] };
     console.log("object", completeData);
 
-    console.log("object", object);
-    // navigate("/ScheduledCard2");
     try {
       const response = await axios.post(
         "https://prodictivity-management-tool2.vercel.app/api/seviceRequest",
-        { ...object }
+        completeData
       );
       console.log("Your message has been sent", response);
       dispatch(removeSlider());
@@ -64,7 +105,6 @@ function LoactionService() {
         console.error(error.message);
       }
     };
-    console.log(data);
     fetchData();
   }, []);
 
@@ -79,14 +119,14 @@ function LoactionService() {
         console.error(error.message);
       }
     };
-    console.log(data);
     fetchData();
   }, []);
+
   return (
     <>
       <div>
         <div className="opacity-[50%]">
-          <img className="h-[1000px] fixed w-full" src={img} alt="Background" />
+          <img className="h-full fixed w-full" src={img} alt="Background" />
         </div>
 
         <Link to="/ServiceRequestForm">
@@ -101,75 +141,71 @@ function LoactionService() {
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-44 h-44" /> {/* Adjusted size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-              <div>
+              <div ref={typeDropdownRef}>
                 <label
                   htmlFor="type"
                   className="block text-sm font-700 text-brown-700 font-Manrope">
                   Type of Service
                 </label>
-                <select
-                  {...register("type", { required: true })}
-                  id="type"
-                  name="type"
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
-                  <option value="">Choose Services</option>
-                  {seviceRequest.map((project) => (
-                    <option
-                      key={project.serviceType}
-                      className="font-Manrope"
-                      value={project.serviceType}>
-                      {project.serviceType}
-                    </option>
-                  ))}
-                </select>
-                {errors.type && <span>This field is required</span>}
+                <div
+                  className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
+                >
+                  <div className="cursor-pointer flex justify-between items-center">
+                    {formData.type || "Choose Services"}
+                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                  </div>
+                  {isTypeDropdownOpen && (
+                    <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                      {seviceRequest.map((service) => (
+                        <div
+                          key={service.serviceType}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => handleTypeChange(service.serviceType)}
+                        >
+                          {service.serviceType}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {errors.type && <span className="text-red-600">{errors.type.message}</span>}
               </div>
 
-              <div>
+              <div ref={projectDropdownRef}>
                 <label
                   htmlFor="projectName"
                   className="block text-sm font-700 text-brown-700 font-Manrope">
                   Project Name
                 </label>
-                <select
-                  {...register("projectName", { required: true })}
-                  id="projectName"
-                  name="projectName"
-                  onChange={handleChange}
-                  className="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
-                  <option value="">Select a project</option>
-                  {data.map((project) => (
-                    <option
-                      key={project.name}
-                      className="font-Manrope"
-                      value={project.name}>
-                      {project.name}
-                    </option>
-                  ))}
-                </select>
-                {errors.projectName && <span>This field is required</span>}
-              </div>
-
-              {/* <div>
-                <label
-                  htmlFor="projectName"
-                  className="block text-sm font-medium text-brown-700 font-Manrope"
+                <div
+                  className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  onClick={() => setIsProjectDropdownOpen(!isProjectDropdownOpen)}
                 >
-                  Project Name
-                </label>
-                <input
-                  type="text"
-                  id="projectName"
-                  name="projectName"
-                  readOnly
-                  className="mt-1 block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm p-2 focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                />
-              </div> */}
+                  <div className="cursor-pointer flex justify-between items-center">
+                    {formData.projectName || "Select a project"}
+                    <img className="DropIcon  ml-2" src={Drop} alt="Dropdown Icon" />
+                  </div>
+                  {isProjectDropdownOpen && (
+                    <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                      {data.map((project) => (
+                        <div
+                          key={project.name}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => handleProjectChange(project.name)}
+                        >
+                          {project.name}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {errors.projectName && <span className="text-red-600">{errors.projectName.message}</span>}
+              </div>
 
               <div className="p-5">
                 <button

@@ -36,18 +36,18 @@ function ServiceRequestForm() {
     <>
       <div>
         <div className="opacity-[50%]">
-          <img className="h-[1000px] fixed w-full" src={img} alt="Background" />
+          <img className="h-full fixed w-full" src={img} alt="Background" />
         </div>
         <Link to='/'>
-          <div className="fixed arrowss">
-            <img className="lg:mt-[570px] lg:ml-12 cursor-pointer" src={Frame} alt="Back" />
+          <div className="fixed bottom-4 left-4 lg:bottom-6 lg:left-6">
+            <img className="cursor-pointer" src={Frame} alt="Back" />
           </div>
         </Link>
         <div>
           <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
             <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
               <div className="flex flex-col items-center">
-                <img src={Logo} alt="Logo" className="logo w-44 h-44" /> {/* Adjusted size */}
+                <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
               </div>
 
               <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -67,7 +67,7 @@ function ServiceRequestForm() {
                     id="name"
                     name="name"
                     placeholder="John Doe"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.name && (
                     <span className="text-red-500 text-sm">
@@ -93,7 +93,7 @@ function ServiceRequestForm() {
                     id="mobileNo"
                     name="mobileNo"
                     placeholder="8669711028"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.mobileNo && (
                     <span className="text-red-500 text-sm">
@@ -115,7 +115,7 @@ function ServiceRequestForm() {
                     id="customerId"
                     name="customerId"
                     placeholder="ROFC001"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.customerId && <span className="text-red-500 text-sm">This field is required</span>}
                 </div>
@@ -123,7 +123,7 @@ function ServiceRequestForm() {
                 <div className="p-2">
                   <button
                     type="submit"
-                    className="font-Manrope font-700 w-full bg-red-950 text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                    className="font-Manrope font-700 w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
                   >
                     Proceed for Step 2
                   </button>
