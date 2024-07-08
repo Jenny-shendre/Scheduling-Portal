@@ -1,3 +1,23 @@
+body{
+  background-color: rgba(218, 203, 187, 2) !important;
+
+}
+
+@media only screen and (max-width: 744px) {
+/* 
+  .opImg{
+  } */
+ 
+  .backimg{
+           offset-rotate: 180deg !important;
+           background-image: url("./assets/image\ 1.png"); 
+           background-repeat: no-repeat; 
+         
+
+
+  }
+}
+
 @media only screen and (max-width: 768px) {
 
   .slidess {

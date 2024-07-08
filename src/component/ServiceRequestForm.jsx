@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "../assets/Logo.png";
-import img from "../assets/img.png";
+import img from "../assets/img3.png";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import Frame from "../assets/Frame.png";
@@ -34,9 +34,9 @@ function ServiceRequestForm() {
 
   return (
     <>
-      <div>
-        <div className="opacity-[50%]">
-          <img className="h-full fixed w-full" src={img} alt="Background" />
+      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'}}>
+        <div>
+          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
         </div>
         <Link to='/'>
           <div className="fixed bottom-4 left-4 lg:bottom-6 lg:left-6">

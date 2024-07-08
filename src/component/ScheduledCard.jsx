@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import img from "../assets/img.png";
+import img from "../assets/img3.png";
 import Logo from "../assets/Logo.png";
 import Photh from "../assets/Photh.png";
 import Fram from "../assets/Fram.png";
@@ -23,9 +23,10 @@ function ScheduledCard() {
 
   return (
     <>
-      <div>
-        <div className="opacity-[50%]">
-          <img className="h-full fixed w-full" src={img} alt="Background"></img>
+      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'
+    }}>
+        <div>
+          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
         </div>
 
         <div className="opacity-100 min-h-screen flex flex-col items-center justify-center font-['Roboto'] bg-[#DACBBB]">
