@@ -23,13 +23,13 @@ function ServiceRequestForm() {
     setValue,
   } = useForm();
 
-  const object = {
+  const ACS = {
     mobileNo: "9923110630",
     name: "Shailesh Dnyaneshwar Kale",
     customerId: "ROFC4",
   };
 
-  console.log;
+  console.log("ACS", ACS);
   useEffect(() => {
     const numberData = async (mobileNo) => {
       if (data.length === 0) {
@@ -63,7 +63,10 @@ function ServiceRequestForm() {
   };
 
   const validateFirstLetterCapital = (value) => {
-    return /^[A-Z]/.test(value) || "First letter should be capital";
+    return (
+      /^[A-Z]/.test(value) ||
+      "Please Review your Name and press again to proceed"
+    );
   };
 
   return (
@@ -132,13 +135,14 @@ function ServiceRequestForm() {
                     id="name"
                     name="name"
                     placeholder="John Doe"
-                    value={data.name}
                     onChange={(e) => setname(e.target.value)}
+                    value={data.name}
                     className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.name && (
-                    <span className="text-red-500 text-sm">
-                      {errors.name.message || "This field is required"}
+                    <span className="text-green-600 text-sm">
+                      {errors.name.message ||
+                        "Please review the Customer’s Name and press again to proceed."}
                     </span>
                   )}
                 </div>
@@ -155,13 +159,13 @@ function ServiceRequestForm() {
                     id="customerId"
                     name="customerId"
                     placeholder="ROFC001"
-                    value={data.customerId}
                     onChange={(e) => setcustomerId(e.target.value)}
+                    value={data.customerId}
                     className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
                   />
                   {errors.customerId && (
-                    <span className="text-red-500 text-sm">
-                      This field is required
+                    <span className="text-green-600 text-sm">
+                      Please review the customer ID and press again to proceed.
                     </span>
                   )}
                 </div>
