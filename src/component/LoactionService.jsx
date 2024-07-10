@@ -71,18 +71,21 @@ function LoactionService() {
       setError("type", { type: "manual", message: "This field is required" });
     }
     if (!formData.projectName) {
-      setError("projectName", { type: "manual", message: "This field is required" });
+      setError("projectName", {
+        type: "manual",
+        message: "This field is required",
+      });
     }
     if (!formData.type || !formData.projectName) {
       return;
     }
 
-    const completeData = { ...data, ...formData, ...Slider.Slider[0] };
+    const completeData = { ...formData, ...Slider.Slider };
     console.log("object", completeData);
 
     try {
       const response = await axios.post(
-        "https://prodictivity-management-tool2.vercel.app/api/seviceRequest",
+        "https://project-rof.vercel.app/api/seviceRequest",
         completeData
       );
       console.log("Your message has been sent", response);
@@ -98,7 +101,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/projects"
+          "https://project-rof.vercel.app/api/projects"
         );
         setData(response.data);
       } catch (error) {
@@ -112,7 +115,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/services/fetch-all"
+          "https://project-rof.vercel.app/api/services/fetch-all"
         );
         setseviceRequest(response.data);
       } catch (error) {
@@ -124,10 +127,15 @@ function LoactionService() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'
-    }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
 
         <Link to="/ServiceRequestForm">
@@ -142,7 +150,8 @@ function LoactionService() {
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -154,11 +163,14 @@ function LoactionService() {
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
-                >
+                  onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
                     {formData.type || "Choose Services"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isTypeDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
@@ -166,15 +178,16 @@ function LoactionService() {
                         <div
                           key={service.serviceType}
                           className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleTypeChange(service.serviceType)}
-                        >
+                          onClick={() => handleTypeChange(service.serviceType)}>
                           {service.serviceType}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.type && <span className="text-red-600">{errors.type.message}</span>}
+                {errors.type && (
+                  <span className="text-red-600">{errors.type.message}</span>
+                )}
               </div>
 
               <div ref={projectDropdownRef}>
@@ -185,11 +198,16 @@ function LoactionService() {
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsProjectDropdownOpen(!isProjectDropdownOpen)}
-                >
+                  onClick={() =>
+                    setIsProjectDropdownOpen(!isProjectDropdownOpen)
+                  }>
                   <div className="cursor-pointer flex justify-between items-center">
                     {formData.projectName || "Select a project"}
-                    <img className="DropIcon  ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon  ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isProjectDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
@@ -197,15 +215,18 @@ function LoactionService() {
                         <div
                           key={project.name}
                           className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleProjectChange(project.name)}
-                        >
+                          onClick={() => handleProjectChange(project.name)}>
                           {project.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.projectName && <span className="text-red-600">{errors.projectName.message}</span>}
+                {errors.projectName && (
+                  <span className="text-red-600">
+                    {errors.projectName.message}
+                  </span>
+                )}
               </div>
 
               <div className="p-5">
