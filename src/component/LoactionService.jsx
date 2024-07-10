@@ -101,7 +101,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/projects"
+          "https://project-rof.vercel.app/api/projects"
         );
         setData(response.data);
       } catch (error) {
@@ -115,7 +115,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/services/fetch-all"
+          "https://project-rof.vercel.app/api/services/fetch-all"
         );
         setseviceRequest(response.data);
       } catch (error) {

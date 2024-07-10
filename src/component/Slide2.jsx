@@ -77,7 +77,7 @@ function Slide2() {
     };
     try {
       const response = await axios.post(
-        "https://prodictivity-management-tool2.vercel.app/api/partners/save",
+        "https://project-rof.vercel.app/api/partners/save",
         { ...object }
       );
       console.log("You message has been sent", response);

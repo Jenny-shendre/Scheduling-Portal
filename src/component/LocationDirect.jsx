@@ -84,7 +84,7 @@ function LocationDirect() {
     console.log("object", object);
     try {
       const response = await axios.post(
-        "https://prodictivity-management-tool2.vercel.app/api/customers/save",
+        "https://project-rof.vercel.app/api/customers/save",
         {
           ...object,
         }
