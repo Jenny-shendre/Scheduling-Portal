@@ -52,7 +52,7 @@ function Slide2() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/projects"
+          "https://project-rof.vercel.app/api/projects"
         );
         setData(response.data);
       } catch (error) {
@@ -64,11 +64,14 @@ function Slide2() {
 
   const onSubmit = async () => {
     if (!selectedProject) {
-      setError("projectName", { type: "manual", message: "This field is required" });
+      setError("projectName", {
+        type: "manual",
+        message: "This field is required",
+      });
       return;
     }
     const object = {
-      ...Slider.Slider[0],
+      ...Slider.Slider,
       projectName: selectedProject,
       projectLocation: projectLocation,
     };
@@ -88,9 +91,15 @@ function Slide2() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'}}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
 
         <Link to="/Slide1">
@@ -112,17 +121,19 @@ function Slide2() {
               <div ref={dropdownRef}>
                 <label
                   htmlFor="projectName"
-                  className="block text-sm font-700 text-brown-700 font-Manrope"
-                >
+                  className="block text-sm font-700 text-brown-700 font-Manrope">
                   Project Name
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
                     {selectedProject || "Choose project"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
@@ -132,22 +143,24 @@ function Slide2() {
                           className="p-2 cursor-pointer hover:bg-gray-200"
                           onClick={() =>
                             handleProjectChange(project.name, project.location)
-                          }
-                        >
+                          }>
                           {project.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.projectName && <span className="text-red-700">{errors.projectName.message}</span>}
+                {errors.projectName && (
+                  <span className="text-red-700">
+                    {errors.projectName.message}
+                  </span>
+                )}
               </div>
 
               <div>
                 <label
                   htmlFor="projectLocation"
-                  className="block text-sm font-700 text-brown-700 font-Manrope"
-                >
+                  className="block text-sm font-700 text-brown-700 font-Manrope">
                   Project Location
                 </label>
                 <input
@@ -163,8 +176,7 @@ function Slide2() {
               <div className="p-5">
                 <button
                   type="submit"
-                  className="font-Manrope font-700 w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                >
+                  className="font-Manrope font-700 w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Assign Executive
                 </button>
               </div>

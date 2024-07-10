@@ -52,7 +52,7 @@ function LocationDirect() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://prodictivity-management-tool2.vercel.app/api/projects"
+          "https://project-rof.vercel.app/api/projects"
         );
         setData(response.data);
       } catch (error) {
@@ -65,7 +65,10 @@ function LocationDirect() {
 
   const onSubmit = async (data) => {
     if (!selectedProject) {
-      setError("projectName", { type: "manual", message: "This field is required" });
+      setError("projectName", {
+        type: "manual",
+        message: "This field is required",
+      });
       return;
     }
     const userInfo = {
@@ -73,7 +76,7 @@ function LocationDirect() {
       ProjectLocation: data.projectLocation,
     };
     let object = {
-      ...Slider.Slider[0],
+      ...Slider.Slider,
       projectName: selectedProject,
       projectLocation: projectLocation,
     };
@@ -97,10 +100,15 @@ function LocationDirect() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'
-    }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
 
         <Link to="/DirectFrom">
@@ -115,7 +123,8 @@ function LocationDirect() {
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -127,11 +136,14 @@ function LocationDirect() {
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
                     {selectedProject || "Choose project"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
@@ -141,15 +153,18 @@ function LocationDirect() {
                           className="p-2 cursor-pointer hover:bg-gray-200"
                           onClick={() =>
                             handleProjectChange(project.name, project.location)
-                          }
-                        >
+                          }>
                           {project.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.projectName && <span className="text-red-600">{errors.projectName.message}</span>}
+                {errors.projectName && (
+                  <span className="text-red-600">
+                    {errors.projectName.message}
+                  </span>
+                )}
               </div>
 
               <div>

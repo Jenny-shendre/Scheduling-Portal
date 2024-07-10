@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const SliderSlice = createSlice({
   name: "Slider",
-  initialState: [],
+  initialState: {},
   reducers: {
     addSlider: (state, action) => {
-      state.push(action.payload);
+      return action.payload;
     },
     removeSlider: (state) => {
-      return [];
+      return {};
     },
   },
 });

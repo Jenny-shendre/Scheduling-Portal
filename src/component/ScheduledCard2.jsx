@@ -13,7 +13,7 @@ function ScheduledCard2() {
   const dispatch = useDispatch();
 
   const datacall = () => {
-    setservicePersonName(...Slider.Slider);
+    setservicePersonName(Slider.Slider);
     console.log("Slider", Slider);
   };
 
@@ -25,16 +25,21 @@ function ScheduledCard2() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'
-    }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"></img>
         </div>
 
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-5 w-full max-w-md text-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
             <p className="text-[#632E04] font-700 text-lg mb-4 font-Manrope">
@@ -50,7 +55,8 @@ function ScheduledCard2() {
             </div>
 
             <p className="text-[#632E04] text-lg font-bold mb-2 font-Manrope">
-              You have been Assigned with "{servicePersonName.servicePersonName}"
+              You have been Assigned with "{servicePersonName.servicePersonName}
+              "
             </p>
             <p className="text-[#632E04] text-sm font-bold font-Manrope">
               kindly wait for few minutes you will be attended shortly.

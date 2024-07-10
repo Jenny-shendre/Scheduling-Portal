@@ -13,7 +13,7 @@ function ScheduledCard() {
   const dispatch = useDispatch();
 
   const datacall = () => {
-    setservicePersonName(...Slider.Slider);
+    setservicePersonName(Slider.Slider);
     console.log("Slider", servicePersonName);
   };
 
@@ -23,16 +23,21 @@ function ScheduledCard() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'
-    }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"></img>
         </div>
 
         <div className="opacity-100 min-h-screen flex flex-col items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md text-center mb-4">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-56 h-44" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
             <p className="text-[#632E04] font-700  text-xl mb-4 font-Manrope">
