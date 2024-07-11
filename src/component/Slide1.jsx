@@ -50,27 +50,27 @@ function Slide1() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'}}>
+      <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
         <div >
           <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
         </div>
         <Link to="/">
-          <div className="fixed arrowss bottom-4 left-4">
+          <div className="fixed arrowss  w-[64px] h-[64px] bottom-4 left-4">
             <img className="cursor-pointer" src={Frame} alt="Back" />
           </div>
         </Link>
         <div>
           <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-            <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
+            <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-[656px] flex flex-col items-center">
               <div className="flex flex-col items-center">
-                <img src={Logo} alt="Logo" className="logo w-56 h-44" /> {/* Adjusted logo size */}
+                <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
               </div>
 
-              <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+              <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
                     htmlFor="channelPartnerName"
-                    className="block text-sm font-700  text-brown-700 font-[Manrope]"
+                    className="block input-fonts font-[Manrope]"
                   >
                     Channel Partner's Name
                   </label>
@@ -83,7 +83,7 @@ function Slide1() {
                     id="channelPartnerName"
                     name="channelPartnerName"
                     placeholder="John Doe"
-                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope input-fields block input-fields rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                   />
                   {errors.channelPartnerName && (
                     <span className="text-red-500 text-sm">
@@ -95,7 +95,7 @@ function Slide1() {
                 <div>
                   <label
                     htmlFor="channelPartnerCompanyName"
-                    className="block text-sm font-700  text-brown-700 font-Manrope"
+                    className="block input-fonts font-Manrope"
                   >
                     Channel Partner's Company Name
                   </label>
@@ -107,7 +107,7 @@ function Slide1() {
                     id="channelPartnerCompanyName"
                     name="channelPartnerCompanyName"
                     placeholder="Acme Realtors"
-                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
                   />
                   {errors.channelPartnerCompanyName && (
                     <span className="text-red-500 text-sm">This field is required</span>
@@ -117,7 +117,7 @@ function Slide1() {
                 <div>
                   <label
                     htmlFor="customerName"
-                    className="block text-sm font-700  text-brown-700 font-Manrope"
+                    className="block input-fonts font-Manrope"
                   >
                     Customer Name
                   </label>
@@ -130,7 +130,7 @@ function Slide1() {
                     id="customerName"
                     name="customerName"
                     placeholder="John Doe"
-                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
                   />
                   {errors.customerName && (
                     <span className="text-red-500 text-sm">
@@ -142,7 +142,7 @@ function Slide1() {
                 <div>
                   <label
                     htmlFor="customerMobileLastFour"
-                    className="block text-sm font-700  text-brown-700 font-Manrope"
+                    className="block input-fonts font-Manrope"
                   >
                     Last four digits of Customer Mobile Number
                   </label>
@@ -156,7 +156,7 @@ function Slide1() {
                     id="customerMobileLastFour"
                     name="customerMobileLastFour"
                     placeholder="1234"
-                    className="mt-1 font-Manrope block w-full rounded-md border-gray-300 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-2"
+                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                     onInput={handleInput}
                   />
                   {errors.customerMobileLastFour && (
@@ -166,10 +166,10 @@ function Slide1() {
                   )}
                 </div>
 
-                <div className="p-2">
+                <div className="">
                   <button
                     type="submit"
-                    className="font-Manrope font-700  w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                    className="font-Manrope mt-7 ProceedforStep2 bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
                   >
                     Proceed for Step 2
                   </button>

@@ -88,36 +88,32 @@ function Slide2() {
 
   return (
     <>
-      <div className="opImg" style={{backgroundColor:'rgba(218, 203, 187, 0.7)'}}>
+      <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
         <div>
           <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
         </div>
 
         <Link to="/Slide1">
-          <div className="fixed arrowss bottom-4 left-4">
-            <img
-              className="lg:mt-[500px] lg:ml-12 cursor-pointer"
-              src={Frame}
-              alt="Back"
-            />
+          <div className="fixed arrowss w-[64px] h-[64px] bottom-4 left-4">
+            <img className="cursor-pointer" src={Frame} alt="Back" />
           </div>
         </Link>
-        <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md">
+        <div className="opacity-100  min-h-screen flex  justify-center font-['Roboto'] bg-[#DACBBB]">
+          <div className="bg-[#FFFFFF99] mt-[54px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-h-[514px] h-[466px] flex flex-col items-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" />
+              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
 
-            <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
               <div ref={dropdownRef}>
                 <label
                   htmlFor="projectName"
-                  className="block text-sm font-700 text-brown-700 font-Manrope"
+                  className="block input-fonts font-Manrope"
                 >
                   Project Name
                 </label>
                 <div
-                  className="relative bg-white mt-1 font-Manrope block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
                   <div className="cursor-pointer flex justify-between items-center">
@@ -146,7 +142,7 @@ function Slide2() {
               <div>
                 <label
                   htmlFor="projectLocation"
-                  className="block text-sm font-700 text-brown-700 font-Manrope"
+                  className="block input-fonts font-Manrope"
                 >
                   Project Location
                 </label>
@@ -156,14 +152,14 @@ function Slide2() {
                   name="projectLocation"
                   value={projectLocation}
                   readOnly
-                  className="mt-1 font-Manrope block w-full rounded-md border-gray-300 bg-gray-100 shadow-sm p-2 focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  className="mt-1 p-[24px] font-Manrope block input-fields text-[18px] font-500 text-[#000000] shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                 />
               </div>
 
-              <div className="p-5">
+              <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope font-700 w-full bg-[#632E04] text-white py-2 px-4 rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                  className="font-Manrope ProceedforStep2 mt-7 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
                 >
                   Assign Executive
                 </button>
