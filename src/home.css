@@ -1,18 +1,18 @@
-body{
+body {
   background-color: rgba(218, 203, 187, 2) !important;
 
 }
 
 @media only screen and (max-width: 744px) {
-/* 
+  /* 
   .opImg{
   } */
- 
-  .backimg{
-           offset-rotate: 180deg !important;
-           background-image: url("./assets/image\ 1.png"); 
-           background-repeat: no-repeat; 
-         
+
+  .backimg {
+    offset-rotate: 180deg !important;
+    background-image: url("./assets/image\ 1.png");
+    background-repeat: no-repeat;
+
 
 
   }
@@ -109,8 +109,46 @@ body{
 
 ::placeholder {
   font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .select-menu {
-  margin-left: -8px;
+  margin-left: -24px;
+
+
+
+  padding-left: 13px;
+  gap: 10px;
+  border-radius: 8px;
+  opacity: 0px;
+  border-color: rgba(53, 53, 53, 0.5);
+  border: 1.5px solid
+}
+
+.input-fields {
+  width: 426px;
+  height: 49px;
+  padding: 12px 24px 12px 24px;
+  gap: 10px;
+  border-radius: 8px;
+  opacity: 0px;
+  border-color: rgba(53, 53, 53, 0.5);
+  border: 1.5px solid
+}
+
+.ProceedforStep2 {
+  width: 426px;
+  height: 53px;
+  border-radius: 8px;
+  padding: 10px;
+  gap: 10px;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.input-fonts {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(53, 53, 53, 1);
 }
