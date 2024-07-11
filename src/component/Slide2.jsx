@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import img from "../assets/img3.png";
 import Logo from "../assets/Logo.png";
 import Drop from "../../src/assets/Drop.png";
@@ -21,7 +21,6 @@ function Slide2() {
   const dispatch = useDispatch();
 
   const {
-    register,
     handleSubmit,
     setError,
     clearErrors,

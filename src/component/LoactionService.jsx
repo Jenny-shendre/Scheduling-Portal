@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import img from "../assets/img3.png";
 import Logo from "../assets/Logo.png";
 import Drop from "../../src/assets/Drop.png"; // Import the dropdown icon
@@ -25,7 +25,6 @@ function LoactionService() {
   const projectDropdownRef = useRef(null);
 
   const {
-    register,
     handleSubmit,
     setError,
     clearErrors,
