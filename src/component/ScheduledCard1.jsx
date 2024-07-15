@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import img from "../assets/img3.png";
+import img from "../assets/img.png";
 import Logo from "../assets/Logo.png";
 import Photh from "../assets/Photh.png";
 import Fram from "../assets/Fram.png";
@@ -13,35 +13,26 @@ function ScheduledCard1() {
   const dispatch = useDispatch();
 
   const datacall = () => {
-    setservicePersonName(Slider.Slider);
+    setservicePersonName(...Slider.Slider);
     console.log("Slider");
   };
-
   useEffect(() => {
     datacall();
   }, []);
-
   return (
     <>
-      <div
-        className="opImg"
-        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
-        <div>
-          <img
-            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
-            src={img}
-            alt="Background"
-          />
+      <div>
+        <div className="opacity-[50%]">
+          <img className="h-[1000px] fixed w-full" src={img} alt="Background" />
         </div>
 
         <div className="opacity-100 min-h-screen flex flex-col items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] p-8 w-full max-w-md text-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-56 h-44" />{" "}
-              {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo" />
             </div>
 
-            <p className="text-[#632E04] font-700 text-xl mb-4 font-Manrope">
+            <p className="text-[#632E04] font-semibold text-xl mb-4 font-Manrope">
               Thank you, you have been scheduled
             </p>
 
@@ -53,16 +44,16 @@ function ScheduledCard1() {
               />
             </div>
 
-            <p className="text-[#632E04] font-600 text-lg mb-2 font-Manrope">
+            <p className="text-[#632E04] text-lg mb-2 font-Manrope">
               You have been Assigned with "{servicePersonName.attendantName}"
             </p>
-            <p className="text-[#632E04] font-600 text-sm font-Manrope">
+            <p className="text-[#632E04] text-sm font-Manrope">
               kindly wait for few minutes you will be attended shortly.
             </p>
           </div>
 
           <Link to="/">
-            <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+            <div className="fixed  bottom-20 left-1/2 transform -translate-x-1/2">
               <img
                 className="cursor-pointer"
                 src={Fram}
