@@ -10,6 +10,8 @@ import LocationDirect from "./component/LocationDirect";
 import ScheduledCard1 from "./component/ScheduledCard1";
 import ScheduledCard2 from "./component/ScheduledCard2";
 
+
+
 function App() {
   return (
     <>
