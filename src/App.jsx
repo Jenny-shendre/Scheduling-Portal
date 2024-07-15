@@ -1,3 +1,4 @@
+
 import { Route, Routes } from "react-router-dom";
 import ScheduledCard from "./component/ScheduledCard";
 import Slide from "./component/Slide";
@@ -41,3 +42,4 @@ function App() {
 }
 
 export default App;
+
