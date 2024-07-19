@@ -36,12 +36,12 @@ function Slide() {
         <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[50%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
       </div>
       <div className="slidessss opacity-100 min-h-screen flex items-center justify-center font-['Roboto']">
-        <div className="bg-[#FFFFFF99] text-center bg-opacity-90 px-24 py-[48px] rounded-lg shadow-lg z-[1] h-[614px] w-[565px]">
+        <div className="bg-[#FFFFFF99] text-center bg-opacity-90 px-24 py-[48px] rounded-lg shadow-lg z-[1] h-[614px] w-[565px] relative">
           <div className="flex flex-col slidesss items-center ">
             <img src={Logo} alt="Logo" className="logo w-[234px] h-[186px]" />
           </div>
 
-          <h1 style={{ width: '487px' }} className="text-[24px] text-center slides font-700 lg:relative lg:right-16 font-[Manrope] text-[#42281B]">
+          <h1 style={{ width: '487px' }} className="text-[24px]  text-center slides font-700 lg:relative lg:right-14 font-[Manrope] text-[#42281B]">
             Welcome! to ROF's Self Scheduling Portal
           </h1>
 
@@ -68,9 +68,11 @@ function Slide() {
             </Link>
           </div>
 
-          <p className="text-center absolute text-[16px] font-[Manrope] mt-6 font-500 text-[#42281b] slide-font-color">
-            Please select options below to proceed further
-          </p>
+          <div className="flex justify-center">
+            <p className="text-center text-[16px] font-[Manrope] mt-6 font-500 text-[#42281b] slide-font-color">
+              Please select options below to proceed further
+            </p>
+          </div>
         </div>
       </div>
     </div>
