@@ -121,7 +121,7 @@ function LocationDirect() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-[466px] flex flex-col items-center">
+          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
@@ -179,7 +179,7 @@ function LocationDirect() {
               <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope ProceedforStep2 mt-7 bg-[#632E04] text-white  hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                  className="font-Manrope ProceedforStep2 mt-6 bg-[#632E04] text-white  hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Assign Executive
                 </button>
               </div>

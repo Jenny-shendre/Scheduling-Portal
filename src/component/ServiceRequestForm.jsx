@@ -60,7 +60,7 @@ function ServiceRequestForm() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-[564px] flex flex-col items-center">
+          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
@@ -133,7 +133,7 @@ function ServiceRequestForm() {
               <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope mt-8 ProceedforStep2 bg-[#632E04] text-white rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                  className="font-Manrope mt-2 ProceedforStep2 bg-[#632E04] text-white rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Proceed for Step 2
                 </button>
               </div>
