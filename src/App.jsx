@@ -9,6 +9,8 @@ import LoactionService from "./component/LoactionService";
 import LocationDirect from "./component/LocationDirect";
 import ScheduledCard1 from "./component/ScheduledCard1";
 import ScheduledCard2 from "./component/ScheduledCard2";
+import Cheque from "./component/Cheque1";
+import UploadCheuqe from "./component/UploadCheque";
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
           <Route
             path="/ServiceRequestForm"
             element={<ServiceRequestForm />}></Route>
+          <Route
+            path="/Cheque1"
+            element={<Cheque />}></Route>
+          <Route
+            path="/UploadCheque"
+            element={<UploadCheuqe />}></Route>
           <Route path="/LoactionService" element={<LoactionService />}></Route>
           <Route path="/LocationDirect" element={<LocationDirect />}></Route>
           <Route path="/ScheduledCard1" element={<ScheduledCard1 />}></Route>
