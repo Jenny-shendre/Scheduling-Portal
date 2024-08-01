@@ -78,7 +78,7 @@ function Slide() {
 
           <div className="flex justify-center w-full mt-6">
             <p className="text-center text-[16px] font-[Manrope] font-500 text-[#42281b] slide-font-color">
-              Please select options below to proceed further
+              Please select options above to proceed further
             </p>
           </div>
         </div>
