@@ -34,10 +34,10 @@ function Slide() {
       <div>
         <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[50%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
       </div>
-      <div className="slidessss self-center opacity-100 min-h-screen flex items-center justify-center font-['Roboto']">
-        <div className="hero-section bg-[#FFFFFF99] self-center text-center bg-opacity-90 p-[12px] w-[662px] h-[614px] rounded-lg shadow-lg z-[1] relative flex flex-col items-center justify-center">
+      <div className="slidessss self-center bg-grey-100 min-h-screen flex items-center justify-center font-['Roboto']">
+        <div className="hero-section bg-[#FFFFFF60] backdrop-blur-lg self-center text-center bg-opacity-90 p-[12px] w-[662px] h-[614px] rounded-lg shadow-lg z-[1] relative flex flex-col items-center justify-center">
           <div className="flex flex-col items-center mb-4">
-            <img src={Logo} alt="Logo" className="logo w-[234px] h-[186px]" />
+            <img src={Logo} alt="Logo"style={{width:"234px", height:"186px"}} />
           </div>
 
           <h1 className="text-[24px] text-center slides font-700 font-[Manrope] text-[#42281B]">
@@ -70,7 +70,7 @@ function Slide() {
               <Link to="/Cheque1">
                 <div className="card text-hover flex flex-col items-center p-3 border-2 w-[133px] h-[118px] bg-white shadow-sm rounded-lg hover:border-[#632E04] transition">
                   <img className="cheque max-h-[68px] max-w-[68px]" src={Cheque} alt="Cheque"></img>
-                  <span className="font-semibold text-[12.8px] mt-2 font-Manrope">Cheque</span>
+                  <span className="font-semibold text-[12.8px] mt-2 font-Manrope">Upload Cheque</span>
                 </div>
               </Link>
             </div>

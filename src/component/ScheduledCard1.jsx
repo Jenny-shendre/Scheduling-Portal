@@ -35,12 +35,13 @@ function ScheduledCard1() {
         </div>
 
         <div className="opacity-100 min-h-screen flex flex-col items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] w-[614px] h-[548px] flex flex-col items-center text-center p-6">
+          <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] w-[614px] h-[548px] flex flex-col items-center text-center p-6">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[139px] h-[127.15px]" /> {/* Adjusted logo size */}
             </div>
 
-            <p className="text-[#632E04] font-700 text-[32px] mb-6 font-Manrope">
+            <p className="text-[#632E04] font-700 text-[32px] mb-6 font-Manrope"
+            style={{width:"501px",height:"33px"}}>
               Thank you, you have been scheduled
             </p>
 

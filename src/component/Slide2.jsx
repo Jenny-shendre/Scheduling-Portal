@@ -106,7 +106,7 @@ function Slide2() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] mt-[54px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
+          <div className="bg-[#FFFFFF60] backdrop-blur-lg mt-[54px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
@@ -123,8 +123,10 @@ function Slide2() {
                   className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
-                  <div className="cursor-pointer flex justify-between items-center">
+                  <div className="cursor-pointer flex justify-between items-center w-[131] h-[25] ">
+                   {/* style={{width:"131px", height:"25px"}} */}
                     {selectedProject || "Choose project"}
+                    
                     <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
                   </div>
                   {isDropdownOpen && (
@@ -161,16 +163,19 @@ function Slide2() {
                   type="text"
                   id="projectLocation"
                   name="projectLocation"
+                  placeholder="123, Street Name, CIty"
                   value={projectLocation}
                   readOnly
-                  className="mt-1 p-[24px] font-Manrope block input-fields text-[18px] font-500 text-[#000000] shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  className="mt-1 w-[378] h-[25] p-[24px] font-Manrope block input-fields text-[18px] font-500 text-[#000000] shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
+                 
                 />
               </div>
 
               <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                  className="font-Manrope w-[202] h-[33] ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-800 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                 
                 >
                   Assign Executive
                 </button>

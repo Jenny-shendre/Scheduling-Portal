@@ -60,7 +60,7 @@ function Cheque() {
                     </div>
                 </Link>
                 <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-                    <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
+                    <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
                         <div className="flex flex-col items-center">
                             <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
                         </div>

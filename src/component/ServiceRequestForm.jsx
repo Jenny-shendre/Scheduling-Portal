@@ -60,13 +60,13 @@ function ServiceRequestForm() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
+          <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
             <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label htmlFor="mobileNo" className="block input-fonts font-Manrope">
+                <label htmlFor="mobileNo" className="block input-fonts font-Manrope w-[99px] h-[25px] ">
                   Mobile No *
                 </label>
                 <input
@@ -88,7 +88,7 @@ function ServiceRequestForm() {
                 )}
               </div>
               <div>
-                <label htmlFor="name" className="block input-fonts font-Manrope">
+                <label htmlFor="name" className="block input-fonts font-Manrope w-[168px] h-[25px] ">
                   Customer’s Name*
                 </label>
                 <input
@@ -97,6 +97,7 @@ function ServiceRequestForm() {
                     validate: validateFirstLetterCapital
                   })}
                   type="text"
+                  readOnly
                   id="name"
                   name="name"
                   placeholder="John Doe"
@@ -117,6 +118,7 @@ function ServiceRequestForm() {
                 <input
                   {...register("customerId", { required: true })}
                   type="text"
+                  readOnly
                   id="customerId"
                   name="customerId"
                   placeholder="ROFC001"
@@ -133,7 +135,7 @@ function ServiceRequestForm() {
               <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope mt-2 ProceedforStep2 bg-[#632E04] text-white rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                  className="font-Manrope w-[217] h-[33] mt-2 ProceedforStep2 bg-[#632E04] text-white rounded-md hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Proceed for Step 2
                 </button>
               </div>

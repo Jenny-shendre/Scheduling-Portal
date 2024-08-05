@@ -138,7 +138,7 @@ function LoactionService() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
+          <div className="bg-[#FFFFFF60] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center backdrop-blur-lg">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
@@ -172,7 +172,7 @@ function LoactionService() {
                 </label>
                 <div className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50" onClick={() => setIsProjectDropdownOpen(!isProjectDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
-                    {formData.projectName || "Select a project"}
+                    {formData.projectName || "Choose Project"}
                     <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
                   </div>
                   {isProjectDropdownOpen && (

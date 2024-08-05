@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../assets/Logo.png";
 import img from "../assets/img3.png";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,10 @@ import axios from "axios";
 import { addSlider } from "../features/Data";
 
 function Slide1() {
+  const [inputChar1, setInputChar1] = useState('');
+  const [inputChar2, setInputChar2] = useState('');
+  const [inputChar3, setInputChar3] = useState('');
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -51,8 +55,34 @@ function Slide1() {
   const validateNoNumbersOrSpecialChars = (value) => {
     return /^[A-Za-z\s]+$/.test(value) || "Please enter a valid name";
   };
+  const handleChar = (event) => {
+    const value = event.target.value;
+    const regex = /^[a-zA-Z]*$/;
+    if (regex.test(value)) {
+      setInputChar1(value);
+    }
+   
+  };
+  const handleChar2 = (event) => {
+    const value = event.target.value;
+    const regex = /^[a-zA-Z]*$/;
+    if (regex.test(value)) {
+      setInputChar2(value);
+    }
+   
+  };
+  const handleChar3 = (event) => {
+    const value = event.target.value;
+    const regex = /^[a-zA-Z]*$/;
+    if (regex.test(value)) {
+      setInputChar3(value);
+    }
+   
+  };
+  
 
   return (
+
     <>
       <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
         <div >
@@ -65,7 +95,7 @@ function Slide1() {
         </Link>
         <div>
           <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-            <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 py-6 w-[514px] h-auto flex flex-col items-center">
+            <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 py-6 w-[514px] h-auto flex flex-col items-center">
               <div className="flex flex-col items-center">
                 <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
               </div>
@@ -75,6 +105,7 @@ function Slide1() {
                   <label
                     htmlFor="channelPartnerName"
                     className="block input-fonts font-[Manrope]"
+                    style={{width:"210px",height:"25px",lineHeight:"24.59px"}}
                   >
                     Channel Partner's Name
                   </label>
@@ -87,6 +118,8 @@ function Slide1() {
                       }
                     })}
                     type="text"
+                    value={inputChar1}
+                    onChange={handleChar}
                     id="channelPartnerName"
                     name="channelPartnerName"
                     placeholder="John Doe"
@@ -103,6 +136,7 @@ function Slide1() {
                   <label
                     htmlFor="channelPartnerCompanyName"
                     className="block input-fonts font-Manrope"
+                    style={{width:"297px",height:"25px",lineHeight:"24.59px"}}
                   >
                     Channel Partner's Company Name
                   </label>
@@ -111,10 +145,13 @@ function Slide1() {
                       required: true,
                     })}
                     type="text"
+                    value={inputChar2}
+                    onChange={handleChar2}
                     id="channelPartnerCompanyName"
                     name="channelPartnerCompanyName"
                     placeholder="Acme Realtors"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
+                    style={{fontFamily:"Manrope",fontSize:"18px",fontWeight:"500",lineHeight:"24.59px"}}
                   />
                   {errors.channelPartnerCompanyName && (
                     <span className="text-red-500 text-sm">This field is required</span>
@@ -125,6 +162,7 @@ function Slide1() {
                   <label
                     htmlFor="customerName"
                     className="block input-fonts font-Manrope"
+                   style={{width:"141px", height:"25px",lineHeight:"24.59px",fontWeight:"700"}}
                   >
                     Customer Name
                   </label>
@@ -137,10 +175,13 @@ function Slide1() {
                       }
                     })}
                     type="text"
+                    value={inputChar3}
+                    onChange={handleChar3}
                     id="customerName"
                     name="customerName"
                     placeholder="John Doe"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
+                    style={{fontFamily:"Manrope", fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
                   />
                   {errors.customerName && (
                     <span className="text-red-500 text-sm">
@@ -153,6 +194,7 @@ function Slide1() {
                   <label
                     htmlFor="customerMobileLastFour"
                     className="block input-fonts font-Manrope"
+                    style={{width:"380px", height:"25px",lineHeight:"24.59px"}}
                   >
                     Last four digits of Customer Mobile Number
                   </label>
@@ -167,6 +209,7 @@ function Slide1() {
                     name="customerMobileLastFour"
                     placeholder="1234"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                    style={{fontFamily:"Manrope", fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
                     onInput={handleInput}
                   />
                   {errors.customerMobileLastFour && (
@@ -180,6 +223,7 @@ function Slide1() {
                   <button
                     type="submit"
                     className="font-Manrope ProceedforStep2 mt-2 bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                    style={{fontFamily:"Manrope", fontWeight:"800",fontSize:"24px",lineHeight:"32.78px"}}
                   >
                     Proceed for Step 2
                   </button>
