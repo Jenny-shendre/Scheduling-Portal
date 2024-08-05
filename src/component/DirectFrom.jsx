@@ -56,7 +56,7 @@ function DirectForm() {
         </Link>
 
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF99] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 py-6 w-[514px] h-auto flex flex-col items-center">
+        <div className="bg-[#FFFFFF60] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 py-6 w-[514px] h-auto flex flex-col items-center backdrop-blur-lg">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
@@ -92,6 +92,7 @@ function DirectForm() {
                 <label
                   htmlFor="name"
                   className="block input-fonts font-Manrope"
+                  style={{width:"154px", height:"25px",lineHeight:"24.59px", color:"#353535"}}
                 >
                   Customer's Name
                 </label>
@@ -108,6 +109,7 @@ function DirectForm() {
                   name="name"
                   placeholder="John Doe"
                   className="mt-1 font-Manrope block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  style={{fontFamily:"Manrope",fontSize:"18px",fontWeight:"500",lineHeight:"24.59px"}}
                 />
                 {errors.name && (
                   <span className="text-red-500 text-sm">

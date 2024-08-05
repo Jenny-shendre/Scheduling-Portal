@@ -109,9 +109,11 @@ body {
 }
 
 ::placeholder {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Manrope';
   font-size: 18px;
   font-weight: 500;
+  width: 378px;
+  height: 25px;
 }
 
 .select-menu {
