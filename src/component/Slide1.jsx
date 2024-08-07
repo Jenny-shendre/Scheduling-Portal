@@ -193,8 +193,8 @@ function Slide1() {
                 <div>
                   <label
                     htmlFor="customerMobileLastFour"
-                    className="block input-fonts font-Manrope"
-                    style={{width:"380px", height:"25px",lineHeight:"24.59px"}}
+                    className="block input-fonts"
+                    style={{width:"380px", height:"25px",lineHeight:"24.59px",fontFamily:"Manrope",fontWeight:"500",fontSize:"18px"}}
                   >
                     Last four digits of Customer Mobile Number
                   </label>

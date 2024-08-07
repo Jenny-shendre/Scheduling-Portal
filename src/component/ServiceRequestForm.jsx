@@ -112,7 +112,7 @@ function ServiceRequestForm() {
               </div>
 
               <div>
-                <label htmlFor="customerId" className="block input-fonts font-Manrope">
+                <label htmlFor="customerId" className="block input-fonts font-Manrope  ">
                   Customer ID
                 </label>
                 <input

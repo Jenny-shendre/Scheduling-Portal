@@ -184,7 +184,7 @@ function UploadCheque() {
                   className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
-                    {selectedProject || "Choose project"}
+                    {selectedProject || "Choose Project"}
                     <img
                       className="DropIcon ml-2"
                       src={Drop}
