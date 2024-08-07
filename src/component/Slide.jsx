@@ -35,7 +35,7 @@ function Slide() {
         <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[50%] sm:bg-[#c49f82] backimg" src={img} alt="Background"></img>
       </div>
       <div className="slidessss self-center bg-grey-100 min-h-screen flex items-center justify-center font-['Roboto']">
-        <div className="hero-section bg-[#FFFFFF60] backdrop-blur-lg self-center text-center bg-opacity-90 p-[12px] w-[662px] h-[614px] rounded-lg shadow-lg z-[1] relative flex flex-col items-center justify-center">
+        <div className="hero-section bg-[#FFFFFF60] backdrop-blur-lg self-center text-center bg-opacity-60 p-[12px] w-[662px] h-[614px] rounded-lg shadow-lg z-[1] relative flex flex-col items-center justify-center">
           <div className="flex flex-col items-center mb-4">
             <img src={Logo} alt="Logo"style={{width:"234px", height:"186px"}} />
           </div>
