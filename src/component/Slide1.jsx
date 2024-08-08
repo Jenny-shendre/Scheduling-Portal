@@ -55,41 +55,39 @@ function Slide1() {
   const validateNoNumbersOrSpecialChars = (value) => {
     return /^[A-Za-z\s]+$/.test(value) || "Please enter a valid name";
   };
+
   const handleChar = (event) => {
     const value = event.target.value;
-    const regex = /^[a-zA-Z]*$/;
+    const regex = /^[a-zA-Z\s]*$/;
     if (regex.test(value)) {
       setInputChar1(value);
     }
-   
   };
+
   const handleChar2 = (event) => {
     const value = event.target.value;
-    const regex = /^[a-zA-Z]*$/;
+    const regex = /^[a-zA-Z\s]*$/;
     if (regex.test(value)) {
       setInputChar2(value);
     }
-   
   };
+
   const handleChar3 = (event) => {
     const value = event.target.value;
-    const regex = /^[a-zA-Z]*$/;
+    const regex = /^[a-zA-Z\s]*$/;
     if (regex.test(value)) {
       setInputChar3(value);
     }
-   
   };
-  
 
   return (
-
     <>
       <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
-        <div >
+        <div>
           <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
         </div>
         <Link to="/">
-          <div className="fixed arrowss  w-[64px] h-[64px] bottom-4 left-4">
+          <div className="fixed arrowss w-[64px] h-[64px] bottom-4 left-4">
             <img className="cursor-pointer" src={Frame} alt="Back" />
           </div>
         </Link>
@@ -105,7 +103,7 @@ function Slide1() {
                   <label
                     htmlFor="channelPartnerName"
                     className="block input-fonts font-[Manrope]"
-                    style={{width:"210px",height:"25px",lineHeight:"24.59px"}}
+                    style={{ width: "210px", height: "25px", lineHeight: "24.59px" }}
                   >
                     Channel Partner's Name
                   </label>
@@ -136,7 +134,7 @@ function Slide1() {
                   <label
                     htmlFor="channelPartnerCompanyName"
                     className="block input-fonts font-Manrope"
-                    style={{width:"297px",height:"25px",lineHeight:"24.59px"}}
+                    style={{ width: "297px", height: "25px", lineHeight: "24.59px" }}
                   >
                     Channel Partner's Company Name
                   </label>
@@ -150,8 +148,8 @@ function Slide1() {
                     id="channelPartnerCompanyName"
                     name="channelPartnerCompanyName"
                     placeholder="Acme Realtors"
-                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
-                    style={{fontFamily:"Manrope",fontSize:"18px",fontWeight:"500",lineHeight:"24.59px"}}
+                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                    style={{ fontFamily: "Manrope", fontSize: "18px", fontWeight: "500", lineHeight: "24.59px" }}
                   />
                   {errors.channelPartnerCompanyName && (
                     <span className="text-red-500 text-sm">This field is required</span>
@@ -162,7 +160,7 @@ function Slide1() {
                   <label
                     htmlFor="customerName"
                     className="block input-fonts font-Manrope"
-                   style={{width:"141px", height:"25px",lineHeight:"24.59px",fontWeight:"700"}}
+                    style={{ width: "141px", height: "25px", lineHeight: "24.59px", fontWeight: "700" }}
                   >
                     Customer Name
                   </label>
@@ -180,8 +178,8 @@ function Slide1() {
                     id="customerName"
                     name="customerName"
                     placeholder="John Doe"
-                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
-                    style={{fontFamily:"Manrope", fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
+                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
                   />
                   {errors.customerName && (
                     <span className="text-red-500 text-sm">
@@ -194,7 +192,7 @@ function Slide1() {
                   <label
                     htmlFor="customerMobileLastFour"
                     className="block input-fonts"
-                    style={{width:"380px", height:"25px",lineHeight:"24.59px",fontFamily:"Manrope",fontWeight:"500",fontSize:"18px"}}
+                    style={{ width: "380px", height: "25px", lineHeight: "24.59px", fontFamily: "Manrope", fontWeight: "500", fontSize: "18px" }}
                   >
                     Last four digits of Customer Mobile Number
                   </label>
@@ -209,7 +207,7 @@ function Slide1() {
                     name="customerMobileLastFour"
                     placeholder="1234"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{fontFamily:"Manrope", fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
+                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
                     onInput={handleInput}
                   />
                   {errors.customerMobileLastFour && (
@@ -223,7 +221,7 @@ function Slide1() {
                   <button
                     type="submit"
                     className="font-Manrope ProceedforStep2 mt-2 bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                    style={{fontFamily:"Manrope", fontWeight:"800",fontSize:"24px",lineHeight:"32.78px"}}
+                    style={{ fontFamily: "Manrope", fontWeight: "800", fontSize: "24px", lineHeight: "32.78px" }}
                   >
                     Proceed for Step 2
                   </button>
