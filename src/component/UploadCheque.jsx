@@ -10,6 +10,7 @@ import UploadIcon from "../assets/UploadIcon.png";
 import "../home.css";
 import axios from "axios";
 import { useSelector } from "react-redux";
+
 function UploadCheque() {
   const navigate = useNavigate();
   const Slider = useSelector((state) => state);
@@ -32,7 +33,7 @@ function UploadCheque() {
   const handleProjectChange = (projectName) => {
     setSelectedProject(projectName);
     setIsDropdownOpen(false);
-    clearErrors("projectName"); // Clear errors when an option is selected
+    clearErrors("projectName");
   };
 
   const handleClickOutside = (event) => {
@@ -48,13 +49,7 @@ function UploadCheque() {
     };
   }, []);
 
-  //   const data = [
-  //     { name: "Project A" },
-  //     { name: "Project B" },
-  //     { name: "Project C" },
-  //   ];
-
-  const onSubmit = () => {
+  const onSubmit = async () => {
     if (!selectedProject) {
       setError("projectName", {
         type: "manual",
@@ -62,16 +57,44 @@ function UploadCheque() {
       });
       return;
     }
-    // Navigate to Homepage
-    navigate("/");
+
+    const formData = new FormData();
+    formData.append("mobileNo", Slider.Slider.mobileNo);
+    formData.append("name", Slider.Slider.name);
+    formData.append("customerId", Slider.Slider.customerId);
+    formData.append("selectedProject", selectedProject);
+    formData.append(
+      "chequeImage",
+      capturedImage
+        ? dataURLtoFile(capturedImage, "cheque.png")
+        : dataURLtoFile(uploadedImage, "cheque.png")
+    );
+
+    try {
+      const res = await axios.post(
+        "https://project-rof.vercel.app/api/chequeImage/save",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("res", res);
+      navigate("/");
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   const handleCaptureClick = () => {
     captureInputRef.current.click();
+    uploadInputRef.current.disabled = true;
   };
 
   const handleUploadClick = () => {
     uploadInputRef.current.click();
+    captureInputRef.current.disabled = true;
   };
 
   const handleCaptureChange = (event) => {
@@ -80,6 +103,7 @@ function UploadCheque() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setCapturedImage(reader.result);
+        setUploadedImage(null);
       };
       reader.readAsDataURL(file);
     }
@@ -91,10 +115,12 @@ function UploadCheque() {
       const reader = new FileReader();
       reader.onloadend = () => {
         setUploadedImage(reader.result);
+        setCapturedImage(null);
       };
       reader.readAsDataURL(file);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -109,32 +135,6 @@ function UploadCheque() {
     fetchData();
   }, []);
 
-  const chequeImage = uploadedImage || capturedImage;
-  const completeData = { ...Slider.Slider, selectedProject, chequeImage };
-  console.log("completeData", completeData);
-
-  const AssignServicePerson = async () => {
-    const formData = new FormData();
-    formData.append("mobileNo", Slider.Slider.mobileNo);
-    formData.append("name", Slider.Slider.name);
-    formData.append("customerId", Slider.Slider.customerId);
-    formData.append("selectedProject", selectedProject);
-    formData.append("chequeImage", dataURLtoFile(chequeImage, "cheque.png"));
-    try {
-      const res = await axios.post(
-        "https://project-rof.vercel.app/api/chequeImage/save",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("res", res);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
   const dataURLtoFile = (dataurl, filename) => {
     let arr = dataurl.split(","),
       mime = arr[0].match(/:(.*?);/)[1],
@@ -146,11 +146,13 @@ function UploadCheque() {
     }
     return new File([u8arr], filename, { type: mime });
   };
+
   return (
     <>
       <div
         className="opImg"
-        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}
+      >
         <div>
           <img
             className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
@@ -167,22 +169,24 @@ function UploadCheque() {
         <div className="opacity-100 min-h-screen flex justify-center items-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF60] backdrop-blur-lg mt-[54px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col justify-center items-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />{" "}
-              {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />
             </div>
 
             <form
               className="space-y-4 w-full px-6"
-              onSubmit={handleSubmit(onSubmit)}>
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div ref={dropdownRef}>
                 <label
                   htmlFor="projectName"
-                  className="block input-fonts font-Manrope">
+                  className="block input-fonts font-Manrope"
+                >
                   Project Name
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                >
                   <div className="cursor-pointer flex justify-between items-center">
                     {selectedProject || "Choose Project"}
                     <img
@@ -197,7 +201,8 @@ function UploadCheque() {
                         <div
                           key={project.name}
                           className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleProjectChange(project.name)}>
+                          onClick={() => handleProjectChange(project.name)}
+                        >
                           {project.name}
                         </div>
                       ))}
@@ -212,13 +217,17 @@ function UploadCheque() {
               </div>
               <label
                 htmlFor="projectName"
-                className="block input-fonts font-Manrope">
-                Upload Cheque
+                className="block input-fonts font-Manrope"
+              >
+                {capturedImage ? "Captured Cheque" : "Upload Cheque"}
               </label>
               <div className="w-[426px] flex justify-between gap-[10px]">
                 <div
-                  className="Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer"
-                  onClick={handleCaptureClick}>
+                  className={`Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
+                    capturedImage ? "cursor-not-allowed" : ""
+                  }`}
+                  onClick={handleCaptureClick}
+                >
                   {capturedImage ? (
                     <img
                       src={capturedImage}
@@ -247,8 +256,11 @@ function UploadCheque() {
                   />
                 </div>
                 <div
-                  className="Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer"
-                  onClick={handleUploadClick}>
+                  className={`Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
+                    uploadedImage ? "cursor-not-allowed" : ""
+                  }`}
+                  onClick={handleUploadClick}
+                >
                   {uploadedImage ? (
                     <img
                       src={uploadedImage}
@@ -280,9 +292,9 @@ function UploadCheque() {
               <div className="w-full">
                 <button
                   type="submit"
-                  onClick={() => AssignServicePerson()}
-                  className="font-Manrope ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
-                 SUBMIT
+                  className="font-Manrope ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
+                >
+                  SUBMIT
                 </button>
               </div>
             </form>
