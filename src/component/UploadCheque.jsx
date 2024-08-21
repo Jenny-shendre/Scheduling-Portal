@@ -104,6 +104,7 @@ function UploadCheque() {
       reader.onloadend = () => {
         setCapturedImage(reader.result);
         setUploadedImage(null);
+        uploadInputRef.current.disabled = true;
       };
       reader.readAsDataURL(file);
     }
@@ -116,9 +117,17 @@ function UploadCheque() {
       reader.onloadend = () => {
         setUploadedImage(reader.result);
         setCapturedImage(null);
+        captureInputRef.current.disabled = true;
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleRemoveImage = () => {
+    setCapturedImage(null);
+    setUploadedImage(null);
+    uploadInputRef.current.disabled = false;
+    captureInputRef.current.disabled = false;
   };
 
   useEffect(() => {
@@ -223,17 +232,24 @@ function UploadCheque() {
               </label>
               <div className="w-[426px] flex justify-between gap-[10px]">
                 <div
-                  className={`Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
-                    capturedImage ? "cursor-not-allowed" : ""
-                  }`}
-                  onClick={handleCaptureClick}
+                  className={`Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${uploadedImage ? "blur-sm cursor-not-allowed" : ""
+                    }`}
+                  onClick={!capturedImage ? handleCaptureClick : undefined}
                 >
                   {capturedImage ? (
-                    <img
-                      src={capturedImage}
-                      alt="Captured Cheque"
-                      className="w-full h-full object-cover"
-                    />
+                    <div className="relative w-full h-full">
+                      <img
+                        src={capturedImage}
+                        alt="Captured Cheque"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        onClick={handleRemoveImage}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]"
+                      >
+                        ✕
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <img
@@ -256,17 +272,24 @@ function UploadCheque() {
                   />
                 </div>
                 <div
-                  className={`Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
-                    uploadedImage ? "cursor-not-allowed" : ""
-                  }`}
-                  onClick={handleUploadClick}
+                  className={`Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${capturedImage ? "blur-sm cursor-not-allowed" : ""
+                    }`}
+                  onClick={!uploadedImage ? handleUploadClick : undefined}
                 >
                   {uploadedImage ? (
-                    <img
-                      src={uploadedImage}
-                      alt="Uploaded Cheque"
-                      className="w-full h-full object-cover"
-                    />
+                    <div className="relative w-full h-full">
+                      <img
+                        src={uploadedImage}
+                        alt="Uploaded Cheque"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        onClick={handleRemoveImage}
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]"
+                      >
+                        ✕
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <img
