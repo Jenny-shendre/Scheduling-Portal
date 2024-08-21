@@ -106,7 +106,7 @@ function Slide2() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF60] backdrop-blur-lg mt-[54px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
+          <div className="bg-[#FFFFFF60] backdrop-blur-lg mt-[154px] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
             </div>
