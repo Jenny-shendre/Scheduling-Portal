@@ -155,7 +155,7 @@ function Slide1() {
                     >
                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
                     <option value="Acme Realtors">Acme Realtors</option>
-                    <option value="Acme Realtors">Rainbow system pvt lts
+                    <option value="Rainbow system pvt lts">Rainbow system pvt lts
                     </option>
                     <option value="Beta Builders">Beta Builders</option>
                     <option value="Charlie Constructors">Charlie Constructors</option>
