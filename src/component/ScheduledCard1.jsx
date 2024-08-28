@@ -40,8 +40,7 @@ function ScheduledCard1() {
               <img src={Logo} alt="Logo" className="logo w-[139px] h-[127.15px]" /> {/* Adjusted logo size */}
             </div>
 
-            <p className="text-[#632E04] font-700 text-[32px] mb-6 font-Manrope"
-            style={{width:"501px",height:"33px"}}>
+            <p className="text-[#632E04] font-700 text-[32px] mb-6 font-Manrope">
               Thank you, you have been scheduled
             </p>
 
