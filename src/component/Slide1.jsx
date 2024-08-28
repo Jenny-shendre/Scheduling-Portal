@@ -8,6 +8,7 @@ import "../home.css";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addSlider } from "../features/Data";
+import Drop from "../../src/assets/Drop.png";
 
 function Slide1() {
   const [inputChar1, setInputChar1] = useState('');
@@ -139,19 +140,28 @@ function Slide1() {
                   >
                     Channel Partner's Company Name
                   </label>
-                  <input
-                    {...register("channelPartnerCompanyName", {
-                      required: true,
-                    })}
-                    type="text"
-                    value={inputChar2}
-                    onChange={handleChar2}
-                    id="channelPartnerCompanyName"
-                    name="channelPartnerCompanyName"
-                    placeholder="Acme Realtors"
-                    className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{ fontFamily: "Manrope", fontSize: "18px", fontWeight: "500", lineHeight: "24.59px" }}
-                  />
+                  <select
+                  {...register("channelPartnerCompanyName", {
+                    required: true,
+                  })}
+                  type="text"
+                  value={inputChar2}
+                  onChange={handleChar2}
+                  id="channelPartnerCompanyName"
+                  name="channelPartnerCompanyName"
+                  placeholder="Acme Realtors"
+                  className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  style={{ fontFamily: "Manrope", fontSize: "18px", fontWeight: "500", lineHeight: "24.59px" }}
+                    >
+                   <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <option value="Acme Realtors">Acme Realtors</option>
+                    <option value="Acme Realtors">Rainbow system pvt lts
+                    </option>
+                    <option value="Beta Builders">Beta Builders</option>
+                    <option value="Charlie Constructors">Charlie Constructors</option>
+                    <option value="Delta Developers">Delta Developers</option>
+                  </select>
+                  
                   {errors.channelPartnerCompanyName && (
                     <span className="text-red-500 text-sm">This field is required</span>
                   )}
