@@ -120,7 +120,8 @@ function Slide2() {
                   Project Name
                 </label>
                 <div
-                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  className="relative bg-white mt-1 font-Manrope text-[18px] text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  style={{fontWeight:"700"}}
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 >
                   <div className="cursor-pointer flex justify-between items-center w-[131] h-[25] ">
@@ -166,8 +167,8 @@ function Slide2() {
                   placeholder="123, Street Name, CIty"
                   value={projectLocation}
                   readOnly
-                  className="mt-1 w-[378] h-[25] p-[24px] font-Manrope block input-fields text-[18px] font-500 text-[#000000] shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
-                 
+                  className="mt-1 w-[378] h-[25] p-[24px] font-Manrope block input-fields text-[18px] text-[#000000] shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
+                 style={{fontWeight:"700"}}
                 />
               </div>
 

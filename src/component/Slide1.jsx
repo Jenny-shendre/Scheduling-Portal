@@ -121,7 +121,8 @@ function Slide1() {
                     id="channelPartnerName"
                     name="channelPartnerName"
                     placeholder="John Doe"
-                    className="mt-1 font-Manrope input-fields block input-fields rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                    className="mt-1 input-fields block input-fields rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                    style={{fontFamily:"Manrope",fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
                   />
                   {errors.channelPartnerName && (
                     <span className="text-red-500 text-sm">
@@ -192,7 +193,7 @@ function Slide1() {
                   <label
                     htmlFor="customerMobileLastFour"
                     className="block input-fonts"
-                    style={{ width: "380px", height: "25px", lineHeight: "24.59px", fontFamily: "Manrope", fontWeight: "500", fontSize: "18px" }}
+                    style={{ width: "380px", height: "25px", lineHeight: "24.59px", fontFamily: "Manrope", fontWeight: "700", fontSize: "18px" }}
                   >
                     Last four digits of Customer Mobile Number
                   </label>
