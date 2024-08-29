@@ -14,6 +14,8 @@ function Slide1() {
   const [inputChar1, setInputChar1] = useState('');
   const [inputChar2, setInputChar2] = useState('');
   const [inputChar3, setInputChar3] = useState('');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [selectedCompany, setSelectedCompany] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,11 +28,11 @@ function Slide1() {
   const onSubmit = async (data) => {
     const userInfo = {
       channelPartnerName: data.channelPartnerName,
-      channelPartnerCompanyName: data.channelPartnerCompanyName,
+      channelPartnerCompanyName: selectedCompany,
       customerName: data.customerName,
       customerMobileLastFour: data.customerMobileLastFour,
     };
-    dispatch(addSlider(data));
+    dispatch(addSlider(userInfo));
     try {
       const response = await axios.post("", userInfo);
       console.log("API Response:", response.data);
@@ -40,7 +42,7 @@ function Slide1() {
         "API Error:",
         error.response ? error.response.data : error.message
       );
-      navigate("/Slide2"); // Optionally navigate even on error
+      navigate("/Slide2");
     }
   };
 
@@ -79,6 +81,11 @@ function Slide1() {
     if (regex.test(value)) {
       setInputChar3(value);
     }
+  };
+
+  const handleDropdownSelect = (value) => {
+    setSelectedCompany(value);
+    setDropdownOpen(false);
   };
 
   return (
@@ -140,32 +147,56 @@ function Slide1() {
                   >
                     Channel Partner's Company Name
                   </label>
-                  <select
-                  {...register("channelPartnerCompanyName", {
-                    required: true,
-                  })}
-                  type="text"
-                  value={inputChar2}
-                  onChange={handleChar2}
-                  id="channelPartnerCompanyName"
-                  name="channelPartnerCompanyName"
-                  placeholder="Acme Realtors"
-                  className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  style={{ fontFamily: "Manrope", fontSize: "18px", fontWeight: "500", lineHeight: "24.59px" }}
-                    >
-                   <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
-                    <option value="Acme Realtors">Acme Realtors</option>
-                    <option value="Rainbow system pvt lts">Rainbow system pvt Ltd
-                    </option>
-                    <option value="Beta Builders">Beta Builders</option>
-                    <option value="Charlie Constructors">Charlie Constructors</option>
-                    <option value="Delta Developers">Delta Developers</option>
-                  </select>
-                  
+                  <div className="relative bg-white mt-1 font-Manrope text-[18px] text [#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                     style={{fontWeight:"700"}}
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                      >
+
+                  <div className="cursor-pointer flex justify-between items-center w-[131] h-[25] ">
+                   {selectedCompany || "Select a company"}
+
+                      <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    </div>
+                    {dropdownOpen && (
+                      <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
+                        <div
+                          onClick={() => handleDropdownSelect("Acme Realtors")}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          Acme Realtors
+                        </div>
+                        <div
+                          onClick={() => handleDropdownSelect("Rainbow system pvt ltd")}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          Rainbow system pvt ltd
+                        </div>
+                        <div
+                          onClick={() => handleDropdownSelect("Beta Builders")}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          Beta Builders
+                        </div>
+                        <div
+                          onClick={() => handleDropdownSelect("Charlie Constructors")}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          Charlie Constructors
+                        </div>
+                        <div
+                          onClick={() => handleDropdownSelect("Delta Developers")}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                        >
+                          Delta Developers
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   {errors.channelPartnerCompanyName && (
                     <span className="text-red-500 text-sm">This field is required</span>
                   )}
                 </div>
+
 
                 <div>
                   <label
