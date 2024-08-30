@@ -18,7 +18,6 @@ function Slide1() {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [channelIDs, setchannelIDs] = useState("");
-  const dropdownRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -110,17 +109,19 @@ function Slide1() {
     data.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
   
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropdownOpen(false);
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -225,8 +226,8 @@ function Slide1() {
                       }}
                        // Open dropdown on click
                     />
-                    <div style={{display:'block', alignContent:'center', position:'relative', right:'22px'}}>
-                    <img onClick={() => setDropdownOpen(true)} src = {Drop} style={{width:'10px', height:'10px'}}/>
+                    <div ref={dropdownRef}   style={{display:'block', alignContent:'center', position:'relative', right:'22px'}}>
+                    <img onClick={() => setIsOpen(!isOpen)} src = {Drop} style={{width:'10px', height:'10px'}}/>
 
                     </div>
                      </div>
@@ -234,7 +235,7 @@ function Slide1() {
                      
                    
                     
-                    {dropdownOpen && (
+                    {isOpen && (
                       <div
                         className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
                         style={{ left: '26px', right: 0 }}>
