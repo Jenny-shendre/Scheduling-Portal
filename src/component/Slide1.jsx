@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../assets/Logo.png";
 import img from "../assets/img3.png";
 import { useForm } from "react-hook-form";
@@ -8,7 +8,7 @@ import "../home.css";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { addSlider } from "../features/Data";
-import Drop from "../../src/assets/Drop.png";
+import Drop from "../assets/Drop.png";
 
 function Slide1() {
   const [inputChar1, setInputChar1] = useState("");
@@ -18,6 +18,7 @@ function Slide1() {
   const [selectedCompany, setSelectedCompany] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [channelIDs, setchannelIDs] = useState("");
+  const dropdownRef = useRef(null);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ function Slide1() {
     }
   };
 
+
   const handleChar3 = (event) => {
     const value = event.target.value;
     const regex = /^[a-zA-Z\s]*$/;
@@ -107,6 +109,20 @@ function Slide1() {
   const filteredCompanies = cname.filter((data) =>
     data.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -194,10 +210,12 @@ function Slide1() {
                     Channel Partner's Company Name
                   </label>
                   <div className="relative">
+                    <div style={{width:'435px'}} className="flex block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
                     <input
                       type="text"
                       placeholder="Search and select a company"
-                      className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 w-full"
+                      className="mt-1 font-Manrope input-fields "
+                      
                       style={{ fontWeight: "700" }}
                       value={selectedCompany || searchTerm}
                       onChange={(e) => {
@@ -207,10 +225,19 @@ function Slide1() {
                       }}
                       onClick={() => setDropdownOpen(true)} // Open dropdown on click
                     />
+                    <div style={{display:'block', alignContent:'center', position:'relative', right:'22px'}}>
+                    <img src = {Drop} style={{width:'10px', height:'10px'}}/>
+
+                    </div>
+                     </div>
+
+                     
+                   
+                    
                     {dropdownOpen && (
                       <div
                         className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
-                        style={{ left: 0, right: 0 }}>
+                        style={{ left: '26px', right: 0 }}>
                         {filteredCompanies.map((data) => (
                           <div
                             key={data.name}
