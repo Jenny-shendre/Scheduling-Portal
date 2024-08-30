@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/Logo.png";
 import img from "../assets/img3.png";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,7 @@ function Slide1() {
   const [inputChar3, setInputChar3] = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedCompany, setSelectedCompany] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,6 +46,17 @@ function Slide1() {
       navigate("/Slide2");
     }
   };
+
+  const [cname, setCname] = useState([]);
+  const fetchData = async () => {
+    await axios.get('https://project-rof.vercel.app/api/channels')
+      .then((res) => setCname(res.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const handleInput = (e) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 4);
@@ -88,6 +100,11 @@ function Slide1() {
     setDropdownOpen(false);
   };
 
+  
+  const filteredCompanies = cname.filter((data) =>
+    data.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
@@ -130,7 +147,7 @@ function Slide1() {
                     name="channelPartnerName"
                     placeholder="John Doe"
                     className="mt-1 input-fields block input-fields rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{fontFamily:"Manrope",fontWeight:"500",fontSize:"18px",lineHeight:"24.59px"}}
+                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
                   />
                   {errors.channelPartnerName && (
                     <span className="text-red-500 text-sm">
@@ -147,48 +164,38 @@ function Slide1() {
                   >
                     Channel Partner's Company Name
                   </label>
-                  <div className="relative bg-white mt-1 font-Manrope text-[18px] text [#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                     style={{fontWeight:"700"}}
-                      onClick={() => setDropdownOpen(!dropdownOpen)}
-                      >
-
-                  <div className="cursor-pointer flex justify-between items-center w-[131] h-[25] ">
-                   {selectedCompany || "Select a company"}
-
-                      <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
-                    </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search and select a company"
+                      className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 w-full"
+                      style={{ fontWeight: "700" }}
+                      value={selectedCompany || searchTerm}
+                      onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        setSelectedCompany('');  // Clear selected company when searching
+                        setDropdownOpen(true);   // Open dropdown when typing
+                      }}
+                      onClick={() => setDropdownOpen(true)}  // Open dropdown on click
+                    />
                     {dropdownOpen && (
-                      <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
-                        <div
-                          onClick={() => handleDropdownSelect("Acme Realtors")}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          Acme Realtors
-                        </div>
-                        <div
-                          onClick={() => handleDropdownSelect("Rainbow system pvt ltd")}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          Rainbow system pvt ltd
-                        </div>
-                        <div
-                          onClick={() => handleDropdownSelect("Beta Builders")}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          Beta Builders
-                        </div>
-                        <div
-                          onClick={() => handleDropdownSelect("Charlie Constructors")}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          Charlie Constructors
-                        </div>
-                        <div
-                          onClick={() => handleDropdownSelect("Delta Developers")}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                        >
-                          Delta Developers
-                        </div>
+                      <div
+                      className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
+
+                       style={{ left: 0, right: 0 }}
+                       >
+                        {filteredCompanies.map((data) => (
+                          <div
+                            key={data.name}
+                            onClick={() => {
+                              handleDropdownSelect(data.name);
+                              setSearchTerm(''); 
+                            }}
+                            className="p-2 cursor-pointer hover:bg-gray-200 w-full"
+                          >
+                            {data.name}
+                          </div>
+                        ))}
                       </div>
                     )}
                   </div>
@@ -196,7 +203,6 @@ function Slide1() {
                     <span className="text-red-500 text-sm">This field is required</span>
                   )}
                 </div>
-
 
                 <div>
                   <label
@@ -233,39 +239,34 @@ function Slide1() {
                 <div>
                   <label
                     htmlFor="customerMobileLastFour"
-                    className="block input-fonts"
-                    style={{ width: "380px", height: "25px", lineHeight: "24.59px", fontFamily: "Manrope", fontWeight: "700", fontSize: "18px" }}
+                    className="block input-fonts font-[Manrope]"
+                    style={{ width: "297px", height: "25px", lineHeight: "24.59px" }}
                   >
-                    Last four digits of Customer Mobile Number
+                    Customer Mobile Last 4 Digits
                   </label>
                   <input
-                    {...register("customerMobileLastFour", {
-                      required: true,
-                      maxLength: 4,
-                      pattern: /^[0-9]{4}$/,
-                    })}
-                    type="text"
+                    {...register("customerMobileLastFour", { required: true })}
+                    onInput={handleInput}
                     id="customerMobileLastFour"
                     name="customerMobileLastFour"
-                    placeholder="1234"
+                    placeholder="XXXX"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                     style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
-                    onInput={handleInput}
                   />
                   {errors.customerMobileLastFour && (
                     <span className="text-red-500 text-sm">
-                      This field is required and must be 4 digits
+                      {errors.customerMobileLastFour.message || "This field is required"}
                     </span>
                   )}
                 </div>
 
-                <div className="">
+                <div className="flex justify-center pt-5">
                   <button
                     type="submit"
-                    className="font-Manrope ProceedforStep2 mt-2 bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                    style={{ fontFamily: "Manrope", fontWeight: "800", fontSize: "24px", lineHeight: "32.78px" }}
+                    className="w-[169px] h-[45px] bg-[#693806] text-white rounded-md shadow-lg font-semibold hover:bg-[#472304]"
+                    style={{ fontFamily: "Manrope", fontWeight: "400" }}
                   >
-                    Proceed for Step 2
+                    Next
                   </button>
                 </div>
               </form>
