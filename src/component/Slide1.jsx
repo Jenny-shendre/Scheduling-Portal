@@ -11,12 +11,13 @@ import { addSlider } from "../features/Data";
 import Drop from "../../src/assets/Drop.png";
 
 function Slide1() {
-  const [inputChar1, setInputChar1] = useState('');
-  const [inputChar2, setInputChar2] = useState('');
-  const [inputChar3, setInputChar3] = useState('');
+  const [inputChar1, setInputChar1] = useState("");
+  const [inputChar2, setInputChar2] = useState("");
+  const [inputChar3, setInputChar3] = useState("");
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [selectedCompany, setSelectedCompany] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [channelIDs, setchannelIDs] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,8 +33,10 @@ function Slide1() {
       channelPartnerCompanyName: selectedCompany,
       customerName: data.customerName,
       customerMobileLastFour: data.customerMobileLastFour,
+      channelID: channelIDs,
     };
     dispatch(addSlider(userInfo));
+    console.log("userInfo", userInfo);
     try {
       const response = await axios.post("", userInfo);
       console.log("API Response:", response.data);
@@ -49,7 +52,8 @@ function Slide1() {
 
   const [cname, setCname] = useState([]);
   const fetchData = async () => {
-    await axios.get('https://project-rof.vercel.app/api/channels')
+    await axios
+      .get("https://project-rof.vercel.app/api/channels")
       .then((res) => setCname(res.data))
       .catch((err) => console.log(err));
   };
@@ -100,16 +104,21 @@ function Slide1() {
     setDropdownOpen(false);
   };
 
-  
   const filteredCompanies = cname.filter((data) =>
     data.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <>
-      <div className="opImg" style={{ backgroundColor: 'rgba(218, 203, 187, 0.7)' }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
         <Link to="/">
           <div className="fixed arrowss w-[64px] h-[64px] bottom-4 left-4">
@@ -120,16 +129,26 @@ function Slide1() {
           <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
             <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 py-6 w-[514px] h-auto flex flex-col items-center">
               <div className="flex flex-col items-center">
-                <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
+                <img
+                  src={Logo}
+                  alt="Logo"
+                  className="logo w-[168px] h-[151px]"
+                />{" "}
+                {/* Adjusted logo size */}
               </div>
 
-              <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                className="space-y-4 w-full px-6"
+                onSubmit={handleSubmit(onSubmit)}>
                 <div>
                   <label
                     htmlFor="channelPartnerName"
                     className="block input-fonts font-[Manrope]"
-                    style={{ width: "210px", height: "25px", lineHeight: "24.59px" }}
-                  >
+                    style={{
+                      width: "210px",
+                      height: "25px",
+                      lineHeight: "24.59px",
+                    }}>
                     Channel Partner's Name
                   </label>
                   <input
@@ -137,8 +156,9 @@ function Slide1() {
                       required: true,
                       validate: {
                         firstLetterCapital: validateFirstLetterCapital,
-                        noNumbersOrSpecialChars: validateNoNumbersOrSpecialChars
-                      }
+                        noNumbersOrSpecialChars:
+                          validateNoNumbersOrSpecialChars,
+                      },
                     })}
                     type="text"
                     value={inputChar1}
@@ -147,11 +167,17 @@ function Slide1() {
                     name="channelPartnerName"
                     placeholder="John Doe"
                     className="mt-1 input-fields block input-fields rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
+                    style={{
+                      fontFamily: "Manrope",
+                      fontWeight: "500",
+                      fontSize: "18px",
+                      lineHeight: "24.59px",
+                    }}
                   />
                   {errors.channelPartnerName && (
                     <span className="text-red-500 text-sm">
-                      {errors.channelPartnerName.message || "This field is required"}
+                      {errors.channelPartnerName.message ||
+                        "This field is required"}
                     </span>
                   )}
                 </div>
@@ -160,8 +186,11 @@ function Slide1() {
                   <label
                     htmlFor="channelPartnerCompanyName"
                     className="block input-fonts font-Manrope"
-                    style={{ width: "297px", height: "25px", lineHeight: "24.59px" }}
-                  >
+                    style={{
+                      width: "297px",
+                      height: "25px",
+                      lineHeight: "24.59px",
+                    }}>
                     Channel Partner's Company Name
                   </label>
                   <div className="relative">
@@ -173,26 +202,24 @@ function Slide1() {
                       value={selectedCompany || searchTerm}
                       onChange={(e) => {
                         setSearchTerm(e.target.value);
-                        setSelectedCompany('');  // Clear selected company when searching
-                        setDropdownOpen(true);   // Open dropdown when typing
+                        setSelectedCompany(""); // Clear selected company when searching
+                        setDropdownOpen(true); // Open dropdown when typing
                       }}
-                      onClick={() => setDropdownOpen(true)}  // Open dropdown on click
+                      onClick={() => setDropdownOpen(true)} // Open dropdown on click
                     />
                     {dropdownOpen && (
                       <div
-                      className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
-
-                       style={{ left: 0, right: 0 }}
-                       >
+                        className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
+                        style={{ left: 0, right: 0 }}>
                         {filteredCompanies.map((data) => (
                           <div
                             key={data.name}
                             onClick={() => {
                               handleDropdownSelect(data.name);
-                              setSearchTerm(''); 
+                              setchannelIDs(data.channelID);
+                              setSearchTerm("");
                             }}
-                            className="p-2 cursor-pointer hover:bg-gray-200 w-full"
-                          >
+                            className="p-2 cursor-pointer hover:bg-gray-200 w-full">
                             {data.name}
                           </div>
                         ))}
@@ -200,7 +227,9 @@ function Slide1() {
                     )}
                   </div>
                   {errors.channelPartnerCompanyName && (
-                    <span className="text-red-500 text-sm">This field is required</span>
+                    <span className="text-red-500 text-sm">
+                      This field is required
+                    </span>
                   )}
                 </div>
 
@@ -208,8 +237,12 @@ function Slide1() {
                   <label
                     htmlFor="customerName"
                     className="block input-fonts font-Manrope"
-                    style={{ width: "141px", height: "25px", lineHeight: "24.59px", fontWeight: "700" }}
-                  >
+                    style={{
+                      width: "141px",
+                      height: "25px",
+                      lineHeight: "24.59px",
+                      fontWeight: "700",
+                    }}>
                     Customer Name
                   </label>
                   <input
@@ -217,8 +250,9 @@ function Slide1() {
                       required: true,
                       validate: {
                         firstLetterCapital: validateFirstLetterCapital,
-                        noNumbersOrSpecialChars: validateNoNumbersOrSpecialChars
-                      }
+                        noNumbersOrSpecialChars:
+                          validateNoNumbersOrSpecialChars,
+                      },
                     })}
                     type="text"
                     value={inputChar3}
@@ -227,7 +261,12 @@ function Slide1() {
                     name="customerName"
                     placeholder="John Doe"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
+                    style={{
+                      fontFamily: "Manrope",
+                      fontWeight: "500",
+                      fontSize: "18px",
+                      lineHeight: "24.59px",
+                    }}
                   />
                   {errors.customerName && (
                     <span className="text-red-500 text-sm">
@@ -240,8 +279,11 @@ function Slide1() {
                   <label
                     htmlFor="customerMobileLastFour"
                     className="block input-fonts font-[Manrope]"
-                    style={{ width: "297px", height: "25px", lineHeight: "24.59px" }}
-                  >
+                    style={{
+                      width: "297px",
+                      height: "25px",
+                      lineHeight: "24.59px",
+                    }}>
                     Customer Mobile Last 4 Digits
                   </label>
                   <input
@@ -251,11 +293,17 @@ function Slide1() {
                     name="customerMobileLastFour"
                     placeholder="XXXX"
                     className="mt-1 font-Manrope input-fields block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                    style={{ fontFamily: "Manrope", fontWeight: "500", fontSize: "18px", lineHeight: "24.59px" }}
+                    style={{
+                      fontFamily: "Manrope",
+                      fontWeight: "500",
+                      fontSize: "18px",
+                      lineHeight: "24.59px",
+                    }}
                   />
                   {errors.customerMobileLastFour && (
                     <span className="text-red-500 text-sm">
-                      {errors.customerMobileLastFour.message || "This field is required"}
+                      {errors.customerMobileLastFour.message ||
+                        "This field is required"}
                     </span>
                   )}
                 </div>
@@ -264,8 +312,7 @@ function Slide1() {
                   <button
                     type="submit"
                     className="w-[169px] h-[45px] bg-[#693806] text-white rounded-md shadow-lg font-semibold hover:bg-[#472304]"
-                    style={{ fontFamily: "Manrope", fontWeight: "400" }}
-                  >
+                    style={{ fontFamily: "Manrope", fontWeight: "400" }}>
                     Next
                   </button>
                 </div>
