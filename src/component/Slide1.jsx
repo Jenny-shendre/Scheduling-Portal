@@ -223,10 +223,10 @@ function Slide1() {
                         setSelectedCompany(""); // Clear selected company when searching
                         setDropdownOpen(true); // Open dropdown when typing
                       }}
-                      onClick={() => setDropdownOpen(true)} // Open dropdown on click
+                       // Open dropdown on click
                     />
                     <div style={{display:'block', alignContent:'center', position:'relative', right:'22px'}}>
-                    <img src = {Drop} style={{width:'10px', height:'10px'}}/>
+                    <img onClick={() => setDropdownOpen(true)} src = {Drop} style={{width:'10px', height:'10px'}}/>
 
                     </div>
                      </div>
