@@ -91,7 +91,6 @@ function Slide1() {
     }
   };
 
-
   const handleChar3 = (event) => {
     const value = event.target.value;
     const regex = /^[a-zA-Z\s]*$/;
@@ -111,6 +110,7 @@ function Slide1() {
 
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+
   
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -211,12 +211,12 @@ function Slide1() {
                     Channel Partner's Company Name
                   </label>
                   <div className="relative">
-                    <div style={{width:'435px'}} className="flex block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
+                  <div style={{width:'435px'}} className="flex block rounded-md shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50">
                     <input
                       type="text"
                       placeholder="Search and select a company"
-                      className="mt-1 font-Manrope input-fields "
-                      
+                      className="mt-1 font-Manrope input-fields"
+
                       style={{ fontWeight: "700" }}
                       value={selectedCompany || searchTerm}
                       onChange={(e) => {
@@ -224,21 +224,18 @@ function Slide1() {
                         setSelectedCompany(""); // Clear selected company when searching
                         setDropdownOpen(true); // Open dropdown when typing
                       }}
-                       // Open dropdown on click
+                     // onClick={() => setDropdownOpen(true)} // Open dropdown on click
                     />
                     <div ref={dropdownRef}   style={{display:'block', alignContent:'center', position:'relative', right:'22px'}}>
-                    <img onClick={() => setIsOpen(!isOpen)} src = {Drop} style={{width:'10px', height:'10px'}}/>
+                    <img onClick={() => setDropdownOpen(!dropdownOpen)} src = {Drop} style={{width:'10px', height:'10px'}}/>
 
                     </div>
                      </div>
 
-                     
-                   
-                    
-                    {isOpen && (
+                    {dropdownOpen && (
                       <div
                         className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto"
-                        style={{ left: '26px', right: 0 }}>
+                        style={{ left: '26px', right: 0  }}>
                         {filteredCompanies.map((data) => (
                           <div
                             key={data.name}
