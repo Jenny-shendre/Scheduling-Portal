@@ -108,13 +108,13 @@ function Slide1() {
     data.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
+      setDropdownOpen(false); // Close the dropdown
     }
   };
 
