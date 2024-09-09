@@ -53,7 +53,7 @@ function Slide1() {
   const [cname, setCname] = useState([]);
   const fetchData = async () => {
     await axios
-      .get("https://project-rof.vercel.app/api/channels")
+      .get(`${import.meta.env.VITE_BACKEND}/api/channels`)
       .then((res) => setCname(res.data))
       .catch((err) => console.log(err));
   };

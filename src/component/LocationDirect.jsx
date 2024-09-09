@@ -52,7 +52,7 @@ function LocationDirect() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://project-rof.vercel.app/api/projects"
+          `${import.meta.env.VITE_BACKEND}/api/projects`
         );
         setData(response.data);
       } catch (error) {
@@ -84,7 +84,7 @@ function LocationDirect() {
     console.log("object", object);
     try {
       const response = await axios.post(
-        "https://project-rof.vercel.app/api/customers/save",
+        `${import.meta.env.VITE_BACKEND}/api/customers/save`,
         {
           ...object,
         }
@@ -113,20 +113,19 @@ function LocationDirect() {
 
         <Link to="/DirectFrom">
           <div className="fixed arrowss w-[64px] h-[64px] bottom-4 left-4">
-            <img
-              className=" cursor-pointer"
-              src={Frame}
-              alt="Back"
-            />
+            <img className=" cursor-pointer" src={Frame} alt="Back" />
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF60] backdrop-blur-lg  rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
-            <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="space-y-4 w-full px-6"
+              onSubmit={handleSubmit(onSubmit)}>
               <div ref={dropdownRef} className="w-full ">
                 <label
                   htmlFor="projectName"
@@ -135,11 +134,14 @@ function LocationDirect() {
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 p-[12px 24px 12px 24px]"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center w-[131] h-[25] ">
                     {selectedProject || "Choose project"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
@@ -149,15 +151,18 @@ function LocationDirect() {
                           className="p-2 cursor-pointer hover:bg-gray-200"
                           onClick={() =>
                             handleProjectChange(project.name, project.location)
-                          }
-                        >
+                          }>
                           {project.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.projectName && <span className="text-red-700">{errors.projectName.message}</span>}
+                {errors.projectName && (
+                  <span className="text-red-700">
+                    {errors.projectName.message}
+                  </span>
+                )}
               </div>
 
               <div className="w-full">

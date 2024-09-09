@@ -72,7 +72,7 @@ function UploadCheque() {
 
     try {
       const res = await axios.post(
-        "https://project-rof.vercel.app/api/chequeImage/save",
+        `${import.meta.env.VITE_BACKEND}/api/chequeImage/save`,
         formData,
         {
           headers: {
@@ -160,8 +160,7 @@ function UploadCheque() {
     <>
       <div
         className="opImg"
-        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}
-      >
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
           <img
             className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
@@ -183,19 +182,16 @@ function UploadCheque() {
 
             <form
               className="space-y-4 w-full px-6"
-              onSubmit={handleSubmit(onSubmit)}
-            >
+              onSubmit={handleSubmit(onSubmit)}>
               <div ref={dropdownRef}>
                 <label
                   htmlFor="projectName"
-                  className="block input-fonts font-Manrope"
-                >
+                  className="block input-fonts font-Manrope">
                   Project Name
                 </label>
                 <div
                   className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
-                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                >
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
                     {selectedProject || "Choose Project"}
                     <img
@@ -210,8 +206,7 @@ function UploadCheque() {
                         <div
                           key={project.name}
                           className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleProjectChange(project.name)}
-                        >
+                          onClick={() => handleProjectChange(project.name)}>
                           {project.name}
                         </div>
                       ))}
@@ -226,16 +221,15 @@ function UploadCheque() {
               </div>
               <label
                 htmlFor="projectName"
-                className="block input-fonts font-Manrope"
-              >
+                className="block input-fonts font-Manrope">
                 {capturedImage ? "Captured Cheque" : "Upload Cheque"}
               </label>
               <div className="w-[426px] flex justify-between gap-[10px]">
                 <div
-                  className={`Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${uploadedImage ? "blur-sm cursor-not-allowed" : ""
-                    }`}
-                  onClick={!capturedImage ? handleCaptureClick : undefined}
-                >
+                  className={`Capture-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
+                    uploadedImage ? "blur-sm cursor-not-allowed" : ""
+                  }`}
+                  onClick={!capturedImage ? handleCaptureClick : undefined}>
                   {capturedImage ? (
                     <div className="relative w-full h-full">
                       <img
@@ -245,8 +239,7 @@ function UploadCheque() {
                       />
                       <button
                         onClick={handleRemoveImage}
-                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]"
-                      >
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]">
                         ✕
                       </button>
                     </div>
@@ -272,10 +265,10 @@ function UploadCheque() {
                   />
                 </div>
                 <div
-                  className={`Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${capturedImage ? "blur-sm cursor-not-allowed" : ""
-                    }`}
-                  onClick={!uploadedImage ? handleUploadClick : undefined}
-                >
+                  className={`Upload-Cheque w-[210px] h-[129px] border-2 border-[#9F9F9F] bg-white border-dashed rounded-md px-[12px] py-[26px] flex flex-col items-center justify-center cursor-pointer ${
+                    capturedImage ? "blur-sm cursor-not-allowed" : ""
+                  }`}
+                  onClick={!uploadedImage ? handleUploadClick : undefined}>
                   {uploadedImage ? (
                     <div className="relative w-full h-full">
                       <img
@@ -285,8 +278,7 @@ function UploadCheque() {
                       />
                       <button
                         onClick={handleRemoveImage}
-                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]"
-                      >
+                        className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-[12px]">
                         ✕
                       </button>
                     </div>
@@ -315,8 +307,7 @@ function UploadCheque() {
               <div className="w-full">
                 <button
                   type="submit"
-                  className="font-Manrope ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out"
-                >
+                  className="font-Manrope ProceedforStep2 mt-6 p-[10px] bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   SUBMIT
                 </button>
               </div>

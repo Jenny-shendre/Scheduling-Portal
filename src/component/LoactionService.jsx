@@ -85,7 +85,7 @@ function LoactionService() {
 
     try {
       const response = await axios.post(
-        "https://project-rof.vercel.app/api/seviceRequest",
+        `${import.meta.env.VITE_BACKEND}/api/seviceRequest`,
         completeData
       );
       console.log("Your message has been sent", response);
@@ -101,7 +101,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://project-rof.vercel.app/api/projects"
+          `${import.meta.env.VITE_BACKEND}/api/projects`
         );
         setData(response.data);
       } catch (error) {
@@ -115,7 +115,7 @@ function LoactionService() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://project-rof.vercel.app/api/services/fetch-all"
+          `${import.meta.env.VITE_BACKEND}/api/services/fetch-all`
         );
         setseviceRequest(response.data);
       } catch (error) {
@@ -127,9 +127,15 @@ function LoactionService() {
 
   return (
     <>
-      <div className="opImg" style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
 
         <Link to="/ServiceRequestForm">
@@ -140,56 +146,91 @@ function LoactionService() {
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF60] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center backdrop-blur-lg">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />{" "}
+              {/* Adjusted logo size */}
             </div>
 
-            <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="space-y-4 w-full px-6"
+              onSubmit={handleSubmit(onSubmit)}>
               <div ref={typeDropdownRef} className="w-full">
-                <label htmlFor="type" className="block input-fonts font-Manrope">
+                <label
+                  htmlFor="type"
+                  className="block input-fonts font-Manrope">
                   Type of Service
                 </label>
-                <div className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50" onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}>
+                <div
+                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center">
                     {formData.type || "Choose Services"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isTypeDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
                       {seviceRequest.map((service) => (
-                        <div key={service.serviceType} className="p-2 cursor-pointer hover:bg-gray-200" onClick={() => handleTypeChange(service.serviceType)}>
+                        <div
+                          key={service.serviceType}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => handleTypeChange(service.serviceType)}>
                           {service.serviceType}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.type && <span className="text-red-700">{errors.type.message}</span>}
+                {errors.type && (
+                  <span className="text-red-700">{errors.type.message}</span>
+                )}
               </div>
 
               <div ref={projectDropdownRef} className="w-full">
-                <label htmlFor="projectName" className="block input-fonts font-Manrope">
+                <label
+                  htmlFor="projectName"
+                  className="block input-fonts font-Manrope">
                   Project Name
                 </label>
-                <div className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50" onClick={() => setIsProjectDropdownOpen(!isProjectDropdownOpen)}>
+                <div
+                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  onClick={() =>
+                    setIsProjectDropdownOpen(!isProjectDropdownOpen)
+                  }>
                   <div className="cursor-pointer flex justify-between items-center">
                     {formData.projectName || "Choose Project"}
-                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                    <img
+                      className="DropIcon ml-2"
+                      src={Drop}
+                      alt="Dropdown Icon"
+                    />
                   </div>
                   {isProjectDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
                       {data.map((project) => (
-                        <div key={project.name} className="p-2 cursor-pointer hover:bg-gray-200" onClick={() => handleProjectChange(project.name)}>
+                        <div
+                          key={project.name}
+                          className="p-2 cursor-pointer hover:bg-gray-200"
+                          onClick={() => handleProjectChange(project.name)}>
                           {project.name}
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
-                {errors.projectName && <span className="text-red-700">{errors.projectName.message}</span>}
+                {errors.projectName && (
+                  <span className="text-red-700">
+                    {errors.projectName.message}
+                  </span>
+                )}
               </div>
 
               <div className=" w-full">
-                <button type="submit" className="font-Manrope ProceedforStep2 mt-5 sticky bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
+                <button
+                  type="submit"
+                  className="font-Manrope ProceedforStep2 mt-5 sticky bg-[#632E04] text-white hover:bg-brown-700 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
                   Assign Service Person
                 </button>
               </div>
