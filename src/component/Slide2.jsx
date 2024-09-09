@@ -52,7 +52,7 @@ function Slide2() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://project-rof.vercel.app/api/projects"
+          `${import.meta.env.VITE_BACKEND}/api/projects`
         );
         setData(response.data);
       } catch (error) {
@@ -78,7 +78,7 @@ function Slide2() {
     console.log("1111", object);
     try {
       const response = await axios.post(
-        "https://project-rof.vercel.app/api/partners/save",
+        `${import.meta.env.VITE_BACKEND}/api/partners/save`,
         { ...object }
       );
       console.log("You message has been sent", response);

@@ -14,9 +14,14 @@ function ServiceRequestForm() {
   const [data, setData] = useState({
     mobileNo: "",
     name: "",
-    customerId: ""
+    customerId: "",
   });
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm();
 
   const handleMobileInput = (e) => {
     const value = e.target.value.replace(/\D/g, "").slice(0, 10);
@@ -28,7 +33,10 @@ function ServiceRequestForm() {
 
   const fetchCustomerData = async (mobileNo) => {
     try {
-      const res = await axios.put("https://project-rof.vercel.app/api/seviceRequest", { mobileNo });
+      const res = await axios.put(
+        `${import.meta.env.VITE_BACKEND}/api/seviceRequest`,
+        { mobileNo }
+      );
       if (res.data) {
         setData(res.data);
         setValue("name", res.data.name);
@@ -45,14 +53,23 @@ function ServiceRequestForm() {
   };
 
   const validateFirstLetterCapital = (value) => {
-    return /^[A-Z]/.test(value) || "Please Review your Name and press again to proceed";
+    return (
+      /^[A-Z]/.test(value) ||
+      "Please Review your Name and press again to proceed"
+    );
   };
 
   return (
     <>
-      <div className="opImg" style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
+      <div
+        className="opImg"
+        style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
         <div>
-          <img className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg" src={img} alt="Background" />
+          <img
+            className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
+            src={img}
+            alt="Background"
+          />
         </div>
         <Link to="/">
           <div className="fixed bottom-4 w-[64px] h-[64px] left-4 lg:bottom-6 lg:left-6">
@@ -62,18 +79,23 @@ function ServiceRequestForm() {
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
           <div className="bg-[#FFFFFF60] backdrop-blur-lg bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center">
             <div className="flex flex-col items-center">
-              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" /> {/* Adjusted logo size */}
+              <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />{" "}
+              {/* Adjusted logo size */}
             </div>
-            <form className="space-y-4 w-full px-6" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="space-y-4 w-full px-6"
+              onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label htmlFor="mobileNo" className="block input-fonts font-Manrope w-[99px] h-[25px] ">
+                <label
+                  htmlFor="mobileNo"
+                  className="block input-fonts font-Manrope w-[99px] h-[25px] ">
                   Mobile No *
                 </label>
                 <input
                   {...register("mobileNo", {
                     required: true,
                     pattern: /^[0-9]{10}$/,
-                    onChange: handleMobileInput
+                    onChange: handleMobileInput,
                   })}
                   type="text"
                   id="mobileNo"
@@ -88,13 +110,15 @@ function ServiceRequestForm() {
                 )}
               </div>
               <div>
-                <label htmlFor="name" className="block input-fonts font-Manrope w-[168px] h-[25px] ">
+                <label
+                  htmlFor="name"
+                  className="block input-fonts font-Manrope w-[168px] h-[25px] ">
                   Customer’s Name*
                 </label>
                 <input
                   {...register("name", {
                     required: true,
-                    validate: validateFirstLetterCapital
+                    validate: validateFirstLetterCapital,
                   })}
                   type="text"
                   readOnly
@@ -112,7 +136,9 @@ function ServiceRequestForm() {
               </div>
 
               <div>
-                <label htmlFor="customerId" className="block input-fonts font-Manrope  ">
+                <label
+                  htmlFor="customerId"
+                  className="block input-fonts font-Manrope  ">
                   Customer ID
                 </label>
                 <input
