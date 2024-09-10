@@ -350,9 +350,9 @@ function Slide1() {
                 <div className="flex justify-center pt-5">
                   <button
                     type="submit"
-                    className="w-[169px] h-[45px] bg-[#693806] text-white rounded-md shadow-lg font-semibold hover:bg-[#472304]"
-                    style={{ fontFamily: "Manrope", fontWeight: "400" }}>
-                    Next
+                    className="w-[426px] h-[45px] bg-[#693806] text-white rounded-md shadow-lg font-semibold hover:bg-[#472304]"
+                    style={{ fontFamily: "Manrope", fontWeight: "800" , fontSize: "24px"}}>
+                    Proceed for Step 2
                   </button>
                 </div>
               </form>
