@@ -52,8 +52,8 @@ function ScheduledCard() {
             </div>
 
             <p className="text-[#632E04] text-[24px] mb-2 font-Manrope font-500"
-            style={{width:"501px",height:"33px"}}>
-              You have been Assigned with <span className="font-bold">"{servicePersonName.attendantName}"</span>
+            style={{width:"618px",height:"80px"}}>
+              You have been Assigned with   <span className="font-bold">"{servicePersonName.attendantName}"</span>
             </p>
             <p className="text-[#632E04] text-[16px] font-Manrope font-600">
             {/* style={{width:"418px",height:"22px"}} */}  
