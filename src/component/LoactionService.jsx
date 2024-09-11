@@ -93,6 +93,7 @@ function LoactionService() {
       dispatch(addSlider(response.data));
       navigate("/ScheduledCard2");
     } catch (error) {
+      navigate("/SlideNew");
       console.error("Something went wrong", error);
     }
   };

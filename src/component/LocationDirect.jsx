@@ -94,6 +94,7 @@ function LocationDirect() {
       dispatch(addSlider(response.data));
       navigate("/ScheduledCard1");
     } catch (error) {
+      navigate("/SlideNew");
       console.error("something went wrong");
     }
   };
