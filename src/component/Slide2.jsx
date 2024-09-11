@@ -86,6 +86,7 @@ function Slide2() {
       dispatch(removeSlider());
       dispatch(addSlider(response.data));
     } catch (error) {
+      navigate("/SlideNew");
       console.error(error.message);
     }
   };
@@ -95,7 +96,7 @@ function Slide2() {
       <div
         className="opImg "
         style={{ backgroundColor: "rgba(218, 203, 187, 0.7)" }}>
-        <div >
+        <div>
           <img
             className="h-full fixed w-full lg:opacity-[25%] md:opacity-[25%] sm:opacity-[40%] sm:bg-[#c49f82] backimg"
             src={img}
@@ -194,27 +195,6 @@ function Slide2() {
 }
 
 export default Slide2;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useEffect, useState, useRef } from "react";
 // import img from "../assets/img3.png";
@@ -392,7 +372,7 @@ export default Slide2;
 //                   placeholder="123, Street Name, CIty"
 //                   value={projectLocation}
 //                   readOnly
-//                   className="mt-1 black w-full p-2 border border-gray-300 rounded-md shadow-sm 
+//                   className="mt-1 black w-full p-2 border border-gray-300 rounded-md shadow-sm
 //                   font-Manrope block input-fields text-[18px]
 //                    text-[#000000] focus:border-brown-500  focus:ring-brown-500 "
 //                   style={{ fontWeight: "700" }}
@@ -403,7 +383,7 @@ export default Slide2;
 //                 <button
 //                   type="submit"
 //                   className=" w-full  bg-[#632E04] text-white py-2 px-4 rounded-md
-//                   hover:bg-brown-800 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50 
+//                   hover:bg-brown-800 focus:outline-none focus:ring-2 focus:ring-brown-500 focus:ring-opacity-50
 //                   transition duration-150 ease-in-out">
 //                   Assign Executive
 //                 </button>
@@ -417,4 +397,3 @@ export default Slide2;
 // }
 
 // export default Slide2;
-

@@ -11,7 +11,7 @@ import ScheduledCard1 from "./component/ScheduledCard1";
 import ScheduledCard2 from "./component/ScheduledCard2";
 import Cheque from "./component/Cheque1";
 import UploadCheuqe from "./component/UploadCheque";
-
+import SlideNew from "./component/SlideNew";
 function App() {
   return (
     <>
@@ -25,16 +25,13 @@ function App() {
           <Route
             path="/ServiceRequestForm"
             element={<ServiceRequestForm />}></Route>
-          <Route
-            path="/Cheque1"
-            element={<Cheque />}></Route>
-          <Route
-            path="/UploadCheque"
-            element={<UploadCheuqe />}></Route>
+          <Route path="/Cheque1" element={<Cheque />}></Route>
+          <Route path="/UploadCheque" element={<UploadCheuqe />}></Route>
           <Route path="/LoactionService" element={<LoactionService />}></Route>
           <Route path="/LocationDirect" element={<LocationDirect />}></Route>
           <Route path="/ScheduledCard1" element={<ScheduledCard1 />}></Route>
           <Route path="/ScheduledCard2" element={<ScheduledCard2 />}></Route>
+          <Route path="/SlideNew" element={<SlideNew />}></Route>
         </Routes>
 
         {/* <Slide></Slide>
