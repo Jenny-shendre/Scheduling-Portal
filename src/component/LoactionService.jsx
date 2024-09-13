@@ -10,17 +10,16 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addSlider, removeSlider } from "../features/Data";
 
+
 function LoactionService() {
   const navigate = useNavigate();
   const Slider = useSelector((state) => state);
-
   const [formData, setFormData] = useState({});
   const [data, setData] = useState([]);
-  const [seviceRequest, setseviceRequest] = useState([]);
+  const [serviceRequest, setserviceRequest] = useState([]);
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
   const [isProjectDropdownOpen, setIsProjectDropdownOpen] = useState(false);
-  const dispatch = useDispatch();
-
+  const [isOpen, setIsOpen] = useState(false);
   const typeDropdownRef = useRef(null);
   const projectDropdownRef = useRef(null);
 
@@ -32,8 +31,8 @@ function LoactionService() {
     formState: { errors },
   } = useForm();
 
-  const handleTypeChange = (type) => {
-    setFormData({ ...formData, type });
+  const handleTypeChange = (serviceType) => {
+    setFormData({ ...formData, serviceType });
     setIsTypeDropdownOpen(false);
     clearErrors("type"); // Clear errors when an option is selected
   };
@@ -43,6 +42,7 @@ function LoactionService() {
     setIsProjectDropdownOpen(false);
     clearErrors("projectName"); // Clear errors when an option is selected
   };
+  
 
   const handleClickOutside = (event) => {
     if (
@@ -85,7 +85,7 @@ function LoactionService() {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND}/api/seviceRequest`,
+        `${import.meta.env.VITE_BACKEND}/api/serviceRequest`,
         completeData
       );
       console.log("Your message has been sent", response);
@@ -118,7 +118,7 @@ function LoactionService() {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND}/api/services/fetch-all`
         );
-        setseviceRequest(response.data);
+        setserviceRequest(response.data);
       } catch (error) {
         console.error(error.message);
       }
@@ -145,7 +145,7 @@ function LoactionService() {
           </div>
         </Link>
         <div className="opacity-100 min-h-screen flex items-center justify-center font-['Roboto'] bg-[#DACBBB]">
-          <div className="bg-[#FFFFFF60] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-auto py-6 flex flex-col items-center backdrop-blur-lg">
+          <div className="bg-[#FFFFFF60] bg-opacity-90 rounded-lg shadow-lg z-[1] px-6 w-[514px] h-fit pb-7 flex flex-col items-center backdrop-blur-lg">
             <div className="flex flex-col items-center">
               <img src={Logo} alt="Logo" className="logo w-[168px] h-[151px]" />{" "}
               {/* Adjusted logo size */}
@@ -157,28 +157,29 @@ function LoactionService() {
               <div ref={typeDropdownRef} className="w-full">
                 <label
                   htmlFor="type"
-                  className="block input-fonts font-Manrope">
+                  className="block font-700 mt-5 input-fonts font-Manrope">
                   Type of Service
                 </label>
                 <div
-                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
+                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
                   onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}>
-                  <div className="cursor-pointer flex justify-between items-center">
-                    {formData.type || "Choose Services"}
+                  <div className="cursor-pointer flex justify-between items-center w-[131] h-[25]">
+                    {formData.serviceType || "Choose Services"}
+                                    
                     <img
                       className="DropIcon ml-2"
                       src={Drop}
                       alt="Dropdown Icon"
                     />
-                  </div>
+                   </div>
                   {isTypeDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
-                      {seviceRequest.map((service) => (
+                      {data.map((service) => (
                         <div
                           key={service.serviceType}
                           className="p-2 cursor-pointer hover:bg-gray-200"
                           onClick={() => handleTypeChange(service.serviceType)}>
-                          {service.serviceType}
+                           {service.serviceType}
                         </div>
                       ))}
                     </div>
