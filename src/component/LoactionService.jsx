@@ -10,16 +10,15 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addSlider, removeSlider } from "../features/Data";
 
-
 function LoactionService() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const Slider = useSelector((state) => state);
   const [formData, setFormData] = useState({});
   const [data, setData] = useState([]);
-  const [serviceRequest, setserviceRequest] = useState([]);
+  const [serviceRequest, setServiceRequest] = useState([]);
   const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
   const [isProjectDropdownOpen, setIsProjectDropdownOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const typeDropdownRef = useRef(null);
   const projectDropdownRef = useRef(null);
 
@@ -34,7 +33,7 @@ function LoactionService() {
   const handleTypeChange = (serviceType) => {
     setFormData({ ...formData, serviceType });
     setIsTypeDropdownOpen(false);
-    clearErrors("type"); // Clear errors when an option is selected
+    clearErrors("serviceType"); // Clear errors when an option is selected
   };
 
   const handleProjectChange = (projectName) => {
@@ -42,7 +41,6 @@ function LoactionService() {
     setIsProjectDropdownOpen(false);
     clearErrors("projectName"); // Clear errors when an option is selected
   };
-  
 
   const handleClickOutside = (event) => {
     if (
@@ -67,8 +65,11 @@ function LoactionService() {
   }, []);
 
   const onSubmit = async () => {
-    if (!formData.type) {
-      setError("type", { type: "manual", message: "This field is required" });
+    if (!formData.serviceType) {
+      setError("serviceType", {
+        type: "manual",
+        message: "This field is required",
+      });
     }
     if (!formData.projectName) {
       setError("projectName", {
@@ -76,7 +77,7 @@ function LoactionService() {
         message: "This field is required",
       });
     }
-    if (!formData.type || !formData.projectName) {
+    if (!formData.serviceType || !formData.projectName) {
       return;
     }
 
@@ -113,17 +114,17 @@ function LoactionService() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchServiceData = async () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND}/api/services/fetch-all`
         );
-        setserviceRequest(response.data);
+        setServiceRequest(response.data);
       } catch (error) {
         console.error(error.message);
       }
     };
-    fetchData();
+    fetchServiceData();
   }, []);
 
   return (
@@ -161,32 +162,31 @@ function LoactionService() {
                   Type of Service
                 </label>
                 <div
-                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50 "
+                  className="relative bg-white mt-1 font-Manrope text-[18px] font-500 text-[#000000] block input-fields shadow-sm focus:border-brown-500 focus:ring focus:ring-brown-500 focus:ring-opacity-50"
                   onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}>
                   <div className="cursor-pointer flex justify-between items-center w-[131] h-[25]">
                     {formData.serviceType || "Choose Services"}
-                                    
-                    <img
-                      className="DropIcon ml-2"
-                      src={Drop}
-                      alt="Dropdown Icon"
-                    />
-                   </div>
+                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
+                  </div>
                   {isTypeDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
-                      {data.map((service) => (
-                        <div
-                          key={service.serviceType}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleTypeChange(service.serviceType)}>
-                           {service.serviceType}
-                        </div>
-                      ))}
+                      {serviceRequest.length > 0 ? (
+                        serviceRequest.map((service) => (
+                          <div
+                            key={service.serviceType}
+                            className="p-2 cursor-pointer hover:bg-gray-200"
+                            onClick={() => handleTypeChange(service.serviceType)}>
+                            {service.serviceType}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="p-2 text-gray-500">No services available</div>
+                      )}
                     </div>
                   )}
                 </div>
-                {errors.type && (
-                  <span className="text-red-700">{errors.type.message}</span>
+                {errors.serviceType && (
+                  <span className="text-red-700">{errors.serviceType.message}</span>
                 )}
               </div>
 
@@ -203,22 +203,22 @@ function LoactionService() {
                   }>
                   <div className="cursor-pointer flex justify-between items-center">
                     {formData.projectName || "Choose Project"}
-                    <img
-                      className="DropIcon ml-2"
-                      src={Drop}
-                      alt="Dropdown Icon"
-                    />
+                    <img className="DropIcon ml-2" src={Drop} alt="Dropdown Icon" />
                   </div>
                   {isProjectDropdownOpen && (
                     <div className="absolute font-Manrope select-menu z-10 mt-2 w-full bg-white border border-gray-300 rounded-md shadow-lg max-h-40 overflow-y-auto">
-                      {data.map((project) => (
-                        <div
-                          key={project.name}
-                          className="p-2 cursor-pointer hover:bg-gray-200"
-                          onClick={() => handleProjectChange(project.name)}>
-                          {project.name}
-                        </div>
-                      ))}
+                      {data.length > 0 ? (
+                        data.map((project) => (
+                          <div
+                            key={project.name}
+                            className="p-2 cursor-pointer hover:bg-gray-200"
+                            onClick={() => handleProjectChange(project.name)}>
+                            {project.name}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="p-2 text-gray-500">No projects available</div>
+                      )}
                     </div>
                   )}
                 </div>
